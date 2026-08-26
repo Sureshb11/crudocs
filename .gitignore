@@ -4,3 +4,7 @@ node_modules/
 
 # Local tooling
 .claude/
+
+# Working folder for source photographs — originals are large and the
+# processed WebP/JPEG pairs in assets/img/ are what the site actually serves.
+assets/pics/
