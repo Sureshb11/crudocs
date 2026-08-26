@@ -364,6 +364,69 @@ strong { color: var(--ink-800); font-weight: 600; }
 .drop a:hover { background: var(--gold-100); color: var(--gold-800); }
 .drop__dot { flex: none; width: 8px; height: 8px; margin-top: .5rem; border-radius: 50%; background: var(--gold-500); }
 
+/* Mega dropdown — two columns for the product catalogue */
+.drop--mega {
+  min-width: 600px;
+  padding: .75rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .1rem .5rem;
+}
+.drop__head {
+  grid-column: 1 / -1;
+  padding: .55rem .8rem .35rem;
+  font-size: 11.5px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted);
+}
+.drop__all {
+  grid-column: 1 / -1;
+  margin-top: .35rem; padding-top: .5rem;
+  border-top: 1px solid var(--line-soft);
+}
+@media (max-width: 1000px) {
+  .drop--mega { min-width: 0; padding: 0 0 0 .8rem; grid-template-columns: 1fr; }
+  .drop__head { padding: .6rem .5rem .2rem; }
+  .drop__all { border-top-color: var(--line); }
+}
+
+/* Product catalogue tiles */
+.tile {
+  position: relative;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  isolation: isolate;
+  transition: transform .28s var(--ease), box-shadow .28s var(--ease), border-color .28s var(--ease);
+}
+.tile:hover { transform: translateY(-5px); border-color: var(--gold-200); box-shadow: var(--shadow-lg); }
+.tile__art { aspect-ratio: 3 / 2; overflow: hidden; background: var(--ivory-2); }
+.tile__art img, .tile__art svg { width: 100%; height: 100%; object-fit: cover; transition: transform .55s var(--ease); }
+.tile:hover .tile__art img, .tile:hover .tile__art svg { transform: scale(1.05); }
+.tile__body { flex: 1; display: flex; flex-direction: column; padding: 1.35rem 1.4rem 1.5rem; }
+.tile__body h3 { font-size: 1.0625rem; margin-bottom: .35rem; }
+.tile__body p { font-size: var(--fs-sm); color: var(--muted); margin-bottom: .9rem; }
+.tile__body .link-arrow { margin-top: auto; font-size: var(--fs-xs); }
+.tile__count {
+  display: inline-block; margin-bottom: .6rem;
+  font-size: 11.5px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--gold-700);
+}
+
+/* Spec pill row used on product pages */
+.pills { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 0 1.5rem; padding: 0; list-style: none; }
+.pills li {
+  margin: 0; padding: .45rem .9rem;
+  border-radius: 8px;
+  background: var(--gold-100);
+  border: 1px solid var(--gold-200);
+  font-size: var(--fs-xs); font-weight: 600;
+  color: var(--gold-800);
+}
+
 /* Mobile toggle */
 .nav__toggle {
   display: none;

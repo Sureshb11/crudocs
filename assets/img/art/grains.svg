@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" role="img" aria-labelledby="t-grains" preserveAspectRatio="xMidYMid slice">
+  <title id="t-grains">Rice and food grains</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2a2415"/><stop offset="48%" stop-color="#463c1f"/><stop offset="100%" stop-color="#6b5a28"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="28%" cy="18%" r="70%">
+      <stop offset="0%" stop-color="#ffd98a" stop-opacity=".30"/><stop offset="100%" stop-color="#ffd98a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g0" cx="36%" cy="30%" r="72%"><stop offset="0%" stop-color="#fbf5e4"/><stop offset="100%" stop-color="#ddd0ae"/></radialGradient>
+    <radialGradient id="g1" cx="36%" cy="30%" r="72%"><stop offset="0%" stop-color="#e8c887"/><stop offset="100%" stop-color="#b08b3a"/></radialGradient>
+    <radialGradient id="g2" cx="36%" cy="30%" r="72%"><stop offset="0%" stop-color="#fdf6e6"/><stop offset="100%" stop-color="#d9c8a4"/></radialGradient>
+    <radialGradient id="g3" cx="36%" cy="30%" r="72%"><stop offset="0%" stop-color="#b9c17a"/><stop offset="100%" stop-color="#7c8339"/></radialGradient>
+    <radialGradient id="g4" cx="36%" cy="30%" r="72%"><stop offset="0%" stop-color="#f2b134"/><stop offset="100%" stop-color="#b2740c"/></radialGradient>
+    <radialGradient id="g5" cx="36%" cy="30%" r="72%"><stop offset="0%" stop-color="#c08b5c"/><stop offset="100%" stop-color="#7d4f27"/></radialGradient>
+    <filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3"/><feColorMatrix values="0 0 0 0 0.28 0 0 0 0 0.2 0 0 0 0 0.1 0 0 0 .24 0"/></filter>
+  </defs>
+
+  <rect width="900" height="560" fill="url(#bg)"/>
+  <rect width="900" height="560" fill="url(#glow)"/>
+
+  <g stroke="#e3bd68" stroke-opacity=".07" stroke-width="1" fill="none">
+    <path d="M0 120h900M0 300h900M0 470h900M180 0v560M420 0v560M660 0v560"/>
+  </g>
+
+    <g transform="translate(210 200)">
+      <circle r="97" fill="#1a120a" fill-opacity=".55"/>
+      <circle r="90" fill="url(#g0)"/>
+      <circle r="90" fill="none" stroke="#fff3d6" stroke-opacity=".38" stroke-width="2.4"/>
+      <g fill="#a89361" fill-opacity=".5"><ellipse cx="-30" cy="-20" rx="9" ry="3.4" transform="rotate(18 -30 -20)"/><ellipse cx="6" cy="-34" rx="9" ry="3.4" transform="rotate(-12 6 -34)"/><ellipse cx="30" cy="4" rx="9" ry="3.4" transform="rotate(40 30 4)"/><ellipse cx="-12" cy="24" rx="9" ry="3.4" transform="rotate(-25 -12 24)"/><ellipse cx="-46" cy="10" rx="9" ry="3.4" transform="rotate(8 -46 10)"/><ellipse cx="18" cy="34" rx="9" ry="3.4" transform="rotate(60 18 34)"/></g>
+    </g>
+    <g transform="translate(410 148)">
+      <circle r="73" fill="#1a120a" fill-opacity=".55"/>
+      <circle r="66" fill="url(#g1)"/>
+      <circle r="66" fill="none" stroke="#fff3d6" stroke-opacity=".38" stroke-width="2.4"/>
+      <g fill="#7a5716" fill-opacity=".45"><ellipse cx="-20" cy="-14" rx="9" ry="3.4" transform="rotate(22 -20 -14)"/><ellipse cx="10" cy="-24" rx="9" ry="3.4" transform="rotate(-18 10 -24)"/><ellipse cx="20" cy="10" rx="9" ry="3.4" transform="rotate(50 20 10)"/><ellipse cx="-6" cy="20" rx="9" ry="3.4" transform="rotate(-40 -6 20)"/></g>
+    </g>
+    <g transform="translate(590 236)">
+      <circle r="85" fill="#1a120a" fill-opacity=".55"/>
+      <circle r="78" fill="url(#g2)"/>
+      <circle r="78" fill="none" stroke="#fff3d6" stroke-opacity=".38" stroke-width="2.4"/>
+      <g fill="#b19a68" fill-opacity=".45"><ellipse cx="-24" cy="-16" rx="9" ry="3.4" transform="rotate(10 -24 -16)"/><ellipse cx="8" cy="-28" rx="9" ry="3.4" transform="rotate(-30 8 -28)"/><ellipse cx="26" cy="6" rx="9" ry="3.4" transform="rotate(45 26 6)"/><ellipse cx="-10" cy="22" rx="9" ry="3.4" transform="rotate(-15 -10 22)"/></g>
+    </g>
+    <g transform="translate(330 372)">
+      <circle r="69" fill="#1a120a" fill-opacity=".55"/>
+      <circle r="62" fill="url(#g3)"/>
+      <circle r="62" fill="none" stroke="#fff3d6" stroke-opacity=".38" stroke-width="2.4"/>
+      <g fill="#4c5321" fill-opacity=".4"><circle cx="-18" cy="-12" r="6"/><circle cx="10" cy="-20" r="5"/><circle cx="20" cy="8" r="6"/><circle cx="-6" cy="18" r="5"/></g>
+    </g>
+    <g transform="translate(520 418)">
+      <circle r="61" fill="#1a120a" fill-opacity=".55"/>
+      <circle r="54" fill="url(#g4)"/>
+      <circle r="54" fill="none" stroke="#fff3d6" stroke-opacity=".38" stroke-width="2.4"/>
+      <g fill="#7d3f0c" fill-opacity=".4"><ellipse cx="-14" cy="-8" rx="9" ry="3.4" transform="rotate(15 -14 -8)"/><ellipse cx="10" cy="6" rx="9" ry="3.4" transform="rotate(-35 10 6)"/><ellipse cx="-2" cy="18" rx="9" ry="3.4" transform="rotate(55 -2 18)"/></g>
+    </g>
+    <g transform="translate(720 150)">
+      <circle r="55" fill="#1a120a" fill-opacity=".55"/>
+      <circle r="48" fill="url(#g5)"/>
+      <circle r="48" fill="none" stroke="#fff3d6" stroke-opacity=".38" stroke-width="2.4"/>
+      <g fill="#4d3320" fill-opacity=".4"><circle cx="-12" cy="-8" r="5"/><circle cx="8" cy="-14" r="4"/><circle cx="14" cy="6" r="5"/></g>
+    </g>
+
+  <g fill="#ffe6a8" fill-opacity=".5"><circle cx="120" cy="440" r="4"/><circle cx="152" cy="470" r="3"/><circle cx="96" cy="486" r="3"/><circle cx="196" cy="462" r="3"/><circle cx="632" cy="112" r="3"/><circle cx="672" cy="86" r="3"/><circle cx="452" cy="272" r="3"/><circle cx="486" cy="300" r="2.5"/><circle cx="240" cy="316" r="3"/><circle cx="790" cy="300" r="3"/><circle cx="820" cy="400" r="3.5"/><circle cx="60" cy="300" r="3"/></g>
+  <rect width="900" height="560" filter="url(#n)" opacity=".48"/>
+</svg>
