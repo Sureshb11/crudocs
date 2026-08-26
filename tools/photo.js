@@ -1,0 +1,189 @@
+#!/usr/bin/env node
+/**
+ * Swap a placeholder SVG illustration for a real photograph.
+ *
+ *   node tools/photo.js <slot> <path-to-image> ["alt text"]
+ *
+ * Slots: food · chemicals · manpower · sourcing · globe · about
+ *
+ * What it does:
+ *   1. Resizes and crops the photo to the slot's aspect ratio
+ *   2. Writes an optimised WebP plus a JPEG fallback into assets/img/
+ *   3. Rewrites every reference in src/pages/ to a <picture> element,
+ *      preserving the existing alt, loading, style and fetchpriority
+ *   4. Runs the site build
+ *
+ * Needs `sips` (built into macOS) and `cwebp`. Install cwebp with:
+ *   brew install webp
+ *
+ * To go back to the illustration for a slot:
+ *   node tools/photo.js <slot> --revert
+ */
+
+"use strict";
+
+const fs = require("fs");
+const path = require("path");
+const { execFileSync } = require("child_process");
+
+const ROOT = path.join(__dirname, "..");
+const PAGES = path.join(ROOT, "src", "pages");
+const IMG = path.join(ROOT, "assets", "img");
+
+/* Each slot's target size matches the box it is rendered into. */
+const SLOTS = {
+  food:      { w: 1400, h: 875, art: "art/food.svg" },
+  chemicals: { w: 1400, h: 875, art: "art/chemicals.svg" },
+  manpower:  { w: 1400, h: 875, art: "art/manpower.svg" },
+  sourcing:  { w: 1400, h: 875, art: "art/sourcing.svg" },
+  globe:     { w: 1200, h: 1200, art: "art/globe.svg" },
+  about:     { w: 1200, h: 815, art: "about.jpg" }
+};
+
+function die(msg) {
+  console.error("✗ " + msg);
+  process.exit(1);
+}
+
+function have(cmd) {
+  try {
+    execFileSync("which", [cmd], { stdio: "ignore" });
+    return true;
+  } catch (_) {
+    return false;
+  }
+}
+
+/** Resize to cover the target box, then centre-crop to it. */
+function encode(src, slot, spec) {
+  const tmp = path.join(IMG, "." + slot + ".tmp.jpg");
+  const jpg = path.join(IMG, "photo-" + slot + ".jpg");
+  const webp = path.join(IMG, "photo-" + slot + ".webp");
+
+  const dims = execFileSync("sips", ["-g", "pixelWidth", "-g", "pixelHeight", src])
+    .toString()
+    .match(/pixel(?:Width|Height):\s*(\d+)/g)
+    .map((m) => parseInt(m.split(":")[1], 10));
+  const [sw, sh] = dims;
+
+  // Scale so the shorter side still covers the target, then crop.
+  const scale = Math.max(spec.w / sw, spec.h / sh);
+  const rw = Math.ceil(sw * scale);
+  const rh = Math.ceil(sh * scale);
+
+  execFileSync("sips", ["-z", String(rh), String(rw), src, "--out", tmp], { stdio: "ignore" });
+  execFileSync("sips", ["-c", String(spec.h), String(spec.w), tmp, "--out", tmp], { stdio: "ignore" });
+  execFileSync("sips", ["-s", "format", "jpeg", "-s", "formatOptions", "78", tmp, "--out", jpg], { stdio: "ignore" });
+  execFileSync("cwebp", ["-quiet", "-q", "76", tmp, "-o", webp], { stdio: "ignore" });
+  fs.unlinkSync(tmp);
+
+  const kb = (p) => (fs.statSync(p).size / 1024).toFixed(0) + " KB";
+  console.log("  " + spec.w + "×" + spec.h + "  webp " + kb(webp) + "  jpeg " + kb(jpg));
+  return { jpg: "assets/img/photo-" + slot + ".jpg", webp: "assets/img/photo-" + slot + ".webp" };
+}
+
+/** Pull one attribute out of a tag string. */
+const attr = (tag, name) => {
+  const m = tag.match(new RegExp(name + '="([^"]*)"'));
+  return m ? m[1] : null;
+};
+
+function rewriteToPhoto(slot, spec, out, newAlt) {
+  const imgRe = new RegExp(
+    '<img\\b[^>]*src="assets/img/' + spec.art.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + '"[^>]*>',
+    "g"
+  );
+  let touched = 0;
+
+  for (const file of fs.readdirSync(PAGES).filter((f) => f.endsWith(".html"))) {
+    const p = path.join(PAGES, file);
+    let s = fs.readFileSync(p, "utf8");
+    if (!imgRe.test(s)) continue;
+    imgRe.lastIndex = 0;
+
+    s = s.replace(imgRe, (tag) => {
+      const alt = newAlt !== null && newAlt !== undefined ? newAlt : attr(tag, "alt") || "";
+      const keep = ["style", "loading", "decoding", "fetchpriority", "class"]
+        .map((a) => {
+          const v = attr(tag, a);
+          return v === null ? "" : ' ' + a + '="' + v + '"';
+        })
+        .join("");
+
+      return (
+        '<picture>\n' +
+        '        <source srcset="' + out.webp + '" type="image/webp">\n' +
+        '        <img src="' + out.jpg + '" alt="' + alt + '" width="' + spec.w +
+        '" height="' + spec.h + '"' + keep + '>\n' +
+        '      </picture>'
+      );
+    });
+
+    fs.writeFileSync(p, s);
+    touched++;
+    console.log("  updated src/pages/" + file);
+  }
+  return touched;
+}
+
+function revert(slot, spec) {
+  const picRe = new RegExp(
+    '<picture>\\s*<source srcset="assets/img/photo-' + slot + '\\.webp"[^>]*>\\s*(<img\\b[^>]*>)\\s*</picture>',
+    "g"
+  );
+  let touched = 0;
+
+  for (const file of fs.readdirSync(PAGES).filter((f) => f.endsWith(".html"))) {
+    const p = path.join(PAGES, file);
+    let s = fs.readFileSync(p, "utf8");
+    if (!picRe.test(s)) continue;
+    picRe.lastIndex = 0;
+
+    s = s.replace(picRe, (_all, tag) => {
+      const alt = attr(tag, "alt") || "";
+      const keep = ["style", "loading", "decoding", "fetchpriority", "class"]
+        .map((a) => {
+          const v = attr(tag, a);
+          return v === null ? "" : ' ' + a + '="' + v + '"';
+        })
+        .join("");
+      const wh = spec.art.endsWith(".svg")
+        ? ' width="900" height="560"'
+        : ' width="900" height="611"';
+      return '<img src="assets/img/' + spec.art + '" alt="' + alt + '"' + wh + keep + '>';
+    });
+
+    fs.writeFileSync(p, s);
+    touched++;
+    console.log("  reverted src/pages/" + file);
+  }
+  return touched;
+}
+
+function main() {
+  const [slot, src, altText] = process.argv.slice(2);
+
+  if (!slot || !SLOTS[slot]) {
+    die("usage: node tools/photo.js <" + Object.keys(SLOTS).join("|") + "> <image> [\"alt text\"]");
+  }
+  const spec = SLOTS[slot];
+
+  if (src === "--revert") {
+    const n = revert(slot, spec);
+    console.log(n ? "✓ reverted " + slot + " to the illustration" : "nothing to revert for " + slot);
+  } else {
+    if (!src) die("no image given");
+    if (!fs.existsSync(src)) die("no such file: " + src);
+    if (!have("sips")) die("sips not found (macOS only)");
+    if (!have("cwebp")) die("cwebp not found — run: brew install webp");
+
+    console.log("Encoding " + slot + " from " + src);
+    const out = encode(src, slot, spec);
+    const n = rewriteToPhoto(slot, spec, out, altText);
+    if (!n) die("no references to assets/img/" + spec.art + " found in src/pages/");
+  }
+
+  execFileSync("node", [path.join(ROOT, "build.js")], { stdio: "inherit", cwd: ROOT });
+}
+
+main();

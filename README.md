@@ -27,6 +27,8 @@ Live domain: **https://crudocs.com**
 ├── site.webmanifest
 ├── CNAME                    ← custom domain for GitHub Pages
 ├── build.js                 ← the generator (no dependencies)
+├── tools/
+│   └── photo.js             ← swap an illustration for a real photograph
 ├── src/
 │   ├── layout.html          ← page shell: <head>, meta, schema, scripts
 │   ├── partials/
@@ -155,10 +157,32 @@ visual is **original SVG artwork** in `assets/img/art/`:
 | `sourcing.svg` | Sourcing & export — freight containers |
 | `og-card.svg` | Source art for the social share card |
 
-**To swap in real photographs**, replace the `<img src="assets/img/art/….svg">`
-reference with your photo at the same aspect ratio (900 × 560 for the category panels)
-and rebuild. The artwork is a good-looking placeholder, but photographs of your actual
-goods, warehouse and shipments will convert better — particularly on the food pages.
+### Swapping in real photographs
+
+There is a tool for this. Give it a slot and any photo — any size, any aspect ratio —
+and it resizes, crops, encodes a WebP plus a JPEG fallback, rewrites every reference in
+`src/pages/` to a `<picture>` element, and rebuilds:
+
+```bash
+node tools/photo.js food ~/Desktop/spices.jpg "Sacks of turmeric and chilli at a Chennai warehouse"
+```
+
+Slots: `food` · `chemicals` · `manpower` · `sourcing` · `globe` · `about`.
+The third argument is the alt text; omit it and the existing alt is kept.
+
+To go back to the illustration for a slot:
+
+```bash
+node tools/photo.js food --revert
+```
+
+The tool needs `cwebp` (`brew install webp`); `sips` is already on macOS.
+
+Photographs of your actual goods, warehouse and shipments will convert better than the
+artwork — particularly on the food pages. Use real photos of real consignments; avoid
+AI-generated food imagery, which tends to carry visible artifacts (garbled label text,
+impossible packaging) that trade buyers notice, and never show a crate or sack branded
+with a company name that isn't Crudo's.
 
 `assets/img/about.jpg` is a stock handshake photo carried over from the previous site
 and is a good first candidate for replacement.
