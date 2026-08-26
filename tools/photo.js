@@ -76,18 +76,29 @@ function encode(src, slot, spec) {
   const [sw, sh] = dims;
 
   // Scale so the shorter side still covers the target, then crop.
-  const scale = Math.max(spec.w / sw, spec.h / sh);
+  // Never upscale: a source smaller than the slot is encoded at the largest
+  // size it can fill honestly, and the browser scales it up from there.
+  // Faking resolution only produces a soft image in a bigger file.
+  const cover = Math.max(spec.w / sw, spec.h / sh);
+  const scale = Math.min(cover, 1);
+  const outW = Math.round(spec.w * (scale / cover));
+  const outH = Math.round(spec.h * (scale / cover));
   const rw = Math.ceil(sw * scale);
   const rh = Math.ceil(sh * scale);
 
+  if (outW < spec.w) {
+    console.log("  note: source is " + sw + "x" + sh + ", below the " + spec.w + "x" + spec.h +
+                " slot — encoding at " + outW + "x" + outH + " rather than upscaling.");
+  }
+
   execFileSync("sips", ["-z", String(rh), String(rw), src, "--out", tmp], { stdio: "ignore" });
-  execFileSync("sips", ["-c", String(spec.h), String(spec.w), tmp, "--out", tmp], { stdio: "ignore" });
+  execFileSync("sips", ["-c", String(outH), String(outW), tmp, "--out", tmp], { stdio: "ignore" });
   execFileSync("sips", ["-s", "format", "jpeg", "-s", "formatOptions", "78", tmp, "--out", jpg], { stdio: "ignore" });
   execFileSync("cwebp", ["-quiet", "-q", "76", tmp, "-o", webp], { stdio: "ignore" });
   fs.unlinkSync(tmp);
 
   const kb = (p) => (fs.statSync(p).size / 1024).toFixed(0) + " KB";
-  console.log("  " + spec.w + "×" + spec.h + "  webp " + kb(webp) + "  jpeg " + kb(jpg));
+  console.log("  " + outW + "×" + outH + "  webp " + kb(webp) + "  jpeg " + kb(jpg));
   return { jpg: "assets/img/photo-" + slot + ".jpg", webp: "assets/img/photo-" + slot + ".webp" };
 }
 
