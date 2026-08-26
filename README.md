@@ -205,12 +205,13 @@ profiles to the `.social` block if they exist.
 
 ## Imagery
 
-Every visual position on the site is a real photograph in `assets/img/`, encoded as a
-WebP with a JPEG fallback (`photo-<slot>.webp` / `.jpg`):
+Every visual position on the site carries real footage or photography. Stills live in
+`assets/img/` as a WebP with a JPEG fallback (`photo-<slot>.webp` / `.jpg`); the hero
+is video, in `assets/video/`:
 
 | Slot | Used for |
 | --- | --- |
-| `globe` | Homepage hero — Earth at night, city lights across India and South East Asia |
+| `globe` | Homepage hero — **video**, see "The hero video" below |
 | `shipband` | Homepage "where we ship" band, end of page — container ship at a port terminal |
 | `food` | Homepage "three divisions" card — the combined range |
 | `spices` | Spices & seasonings |
@@ -228,6 +229,58 @@ The original SVG artwork this replaced is kept in `assets/img/art/` and regenera
 with `node tools/make-art.js`, in case a slot ever needs to fall back to illustration —
 see "Reverting to illustration" below.
 
+### The hero video
+
+The homepage hero plays an 8-second clip of Earth at night, zooming into India as
+trade routes radiate outward. Source: `assets/pics/globe.mp4`. Encoded to
+`assets/video/` as MP4 (H.264/AAC) and WebM (VP9/Opus), ~0.9 MB each, plus a poster
+still.
+
+**The radial falloff is baked into the video, not applied in CSS.** Each frame is
+multiplied by a centre-out curve so the edges reach true black, and the element is
+then `mix-blend-mode: screen` — black becomes transparent against the hero's ink and
+the globe appears to float with no frame. This is deliberate: a CSS mask alone cannot
+do it, because the clip zooms into a bright close-up mid-way through and masking
+bright full-frame content just relocates the hard edge instead of removing it. Black
+edges also compress better, so the baked version is ~25% smaller.
+
+Re-encode after replacing the source:
+
+```bash
+SRC=assets/pics/globe.mp4
+VF="scale=1152:-2,format=gbrp,geq=\
+r='r(X,Y)*clip(1.5-1.5*hypot((X/W-0.5)/0.5,(Y/H-0.5)/0.5)^2.4,0,1)':\
+g='g(X,Y)*clip(1.5-1.5*hypot((X/W-0.5)/0.5,(Y/H-0.5)/0.5)^2.4,0,1)':\
+b='b(X,Y)*clip(1.5-1.5*hypot((X/W-0.5)/0.5,(Y/H-0.5)/0.5)^2.4,0,1)',format=yuv420p"
+
+ffmpeg -i "$SRC" -vf "$VF" -c:v libx264 -profile:v high -crf 29 -preset slow \
+  -movflags +faststart -g 48 -c:a aac -b:a 96k -ac 2 assets/video/globe.mp4 -y
+ffmpeg -i "$SRC" -vf "$VF" -c:v libvpx-vp9 -crf 40 -b:v 0 -row-mt 1 \
+  -c:a libopus -b:a 96k assets/video/globe.webm -y
+ffmpeg -i "$SRC" -vf "$VF,select=eq(n\,0)" -vframes 1 -q:v 3 \
+  assets/video/globe-poster.jpg -y
+cwebp -q 78 assets/video/globe-poster.jpg -o assets/video/globe-poster.webp
+```
+
+Raising the `1.5-1.5*...` constants widens the visible area; lowering them tightens
+the vignette. Both must stay balanced so the value still reaches 0 at the frame edge —
+if it does not, a dark rectangle appears in the hero.
+
+#### Sound
+
+The clip keeps its music, but **it cannot autoplay with sound.** Every current browser
+refuses to start a video that is not muted until the visitor has interacted with the
+page, so the hero autoplays muted and a "Sound on" toggle sits over the video. That
+toggle is the only way the music can legitimately start. It is revealed by `main.js`
+on the video's `canplay` event, so it never appears over a video that cannot play.
+
+#### Motion preferences
+
+`initHeroVideo()` in `assets/js/main.js` holds the sources in `data-src` and only
+attaches them when `prefers-reduced-motion` is *not* set. A visitor who has reduced
+motion enabled keeps the poster still, gets no sound toggle, and **downloads none of
+the video** — `preload="none"` plus unattached sources means zero video bytes.
+
 ### Swapping in a photograph
 
 Give the tool a slot and any photo — any size, any aspect ratio — and it resizes,
@@ -239,7 +292,9 @@ node tools/photo.js food ~/Desktop/spices.jpg "Sacks of turmeric and chilli at a
 ```
 
 Slots: `spices` · `grains` · `pulses` · `produce` · `eggs` · `naturals` ·
-`chemicals` · `food` · `manpower` · `sourcing` · `globe` · `shipband` · `about`.
+`chemicals` · `food` · `manpower` · `sourcing` · `shipband` · `about`.
+(`globe` still exists in the tool's `SLOTS` table, but the hero it fed is now
+video — running it would restore a still hero and orphan the video.)
 The third argument is the alt text; omit it and the existing alt is kept.
 
 **Never upscales.** A source smaller than the slot is encoded at the largest size it

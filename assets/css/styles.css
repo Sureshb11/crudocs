@@ -545,6 +545,73 @@ strong { color: var(--ink-800); font-weight: 600; }
   box-shadow: 0 24px 60px rgba(0, 0, 0, .45);
 }
 
+/* ---------------------------------------------------------
+   Hero video
+
+   The footage is encoded with a radial falloff baked into the
+   pixels, so every frame reaches true black at its edges. With
+   `screen` blending that black becomes transparent against the
+   hero's ink and the globe appears to float — no card, no frame,
+   and no visible rectangle even mid-clip when the shot zooms
+   into a bright close-up. A CSS mask cannot do this on its own:
+   masking bright full-frame content just moves the hard edge.
+   --------------------------------------------------------- */
+.hero__video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0;
+  box-shadow: none;
+  mix-blend-mode: screen;
+}
+
+/* Without blending the black edges would show as a dark box, so fall back
+   to the framed-card treatment the still images use. */
+@supports not (mix-blend-mode: screen) {
+  .hero__video {
+    border-radius: var(--radius-xl);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .45);
+  }
+}
+
+/* Sound toggle — revealed by JS only once a playable video is wired up. */
+.hero__sound {
+  position: absolute;
+  right: 4%;
+  bottom: 6%;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .5rem .85rem;
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 999px;
+  background: rgba(10, 10, 24, .55);
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+  color: rgba(255, 255, 255, .9);
+  font: 600 var(--fs-xs) / 1 var(--font-sans);
+  letter-spacing: .02em;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.hero__sound:hover { background: rgba(10, 10, 24, .78); border-color: var(--gold-500); color: #fff; }
+.hero__sound:focus-visible { outline: 2px solid var(--gold-500); outline-offset: 3px; }
+.hero__sound-icon { display: inline-flex; }
+.hero__sound .hero__sound-on { display: none; }
+.hero__sound[aria-pressed="true"] .hero__sound-off { display: none; }
+.hero__sound[aria-pressed="true"] .hero__sound-on { display: inline; }
+
+@media (max-width: 640px) {
+  .hero__sound-label { position: absolute; left: -9999px; }
+  .hero__sound { padding: .55rem; }
+}
+
+/* Motion off: no autoplay, no video bytes — main.js leaves the poster in place. */
+@media (prefers-reduced-motion: reduce) {
+  .hero__video { mix-blend-mode: screen; }
+  .hero__sound { display: none; }
+}
+
 /* Ticker of traded goods — a live-trade cue under the hero */
 .ticker {
   border-block: 1px solid rgba(255, 255, 255, .1);

@@ -37,11 +37,31 @@ meta-->
       </div>
     </div>
 
-    <div class="hero__art" aria-hidden="true">
-      <picture>
-        <source srcset="assets/img/photo-globe.webp" type="image/webp">
-        <img src="assets/img/photo-globe.jpg" alt="A full view of Earth from space at night, glowing atmosphere at the rim, with city lights across India and South East Asia connected by a network of trade routes" width="1440" height="1080" decoding="async" fetchpriority="high">
-      </picture>
+    <div class="hero__art">
+      <!--
+        Autoplay only ever starts muted — every current browser blocks sound
+        until the visitor interacts. The toggle below turns the music on, and
+        main.js swaps in the real sources only when motion is allowed, so a
+        reduced-motion visitor is served the poster still and no video bytes.
+      -->
+      <video
+        class="hero__video"
+        poster="assets/video/globe-poster.jpg"
+        width="1152" height="648"
+        muted loop playsinline autoplay preload="none"
+        aria-label="Earth from space at night, city lights across India and South East Asia, with trade routes radiating outward"
+        data-hero-video>
+        <source data-src="assets/video/globe.webm" type="video/webm">
+        <source data-src="assets/video/globe.mp4" type="video/mp4">
+      </video>
+
+      <button class="hero__sound" type="button" data-sound-toggle aria-pressed="false" hidden>
+        <span class="hero__sound-icon" aria-hidden="true">
+          <svg class="hero__sound-off" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="m23 9-6 6M17 9l6 6"/></svg>
+          <svg class="hero__sound-on" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>
+        </span>
+        <span class="hero__sound-label">Sound on</span>
+      </button>
     </div>
   </div>
 </section>

@@ -345,6 +345,67 @@
   /* ---------------------------------------------------------
      Current year in the footer
      --------------------------------------------------------- */
+  /* ---------------------------------------------------------
+     Hero video
+
+     Sources are held in data-src and only attached when motion
+     is allowed, so a reduced-motion visitor never downloads the
+     video at all and keeps the poster still.
+
+     Autoplay is muted because every current browser refuses to
+     start a video with sound before the visitor interacts. The
+     toggle is the only way the music can legitimately start, so
+     it is revealed once the video is actually playable.
+     --------------------------------------------------------- */
+  function initHeroVideo() {
+    var video = document.querySelector("[data-hero-video]");
+    if (!video) return;
+
+    var toggle = document.querySelector("[data-sound-toggle]");
+
+    // Motion reduced: leave the poster, attach nothing, download nothing.
+    if (reduceMotion) {
+      video.removeAttribute("autoplay");
+      return;
+    }
+
+    var sources = video.querySelectorAll("source[data-src]");
+    if (!sources.length) return;
+    Array.prototype.forEach.call(sources, function (el) {
+      el.setAttribute("src", el.dataset.src);
+      el.removeAttribute("data-src");
+    });
+
+    video.preload = "auto";
+    video.load();
+
+    var play = video.play();
+    if (play && typeof play.catch === "function") {
+      // A refused autoplay is not an error worth surfacing; the poster stands in.
+      play.catch(function () {});
+    }
+
+    if (!toggle) return;
+
+    video.addEventListener("canplay", function () {
+      toggle.hidden = false;
+    }, { once: true });
+
+    toggle.addEventListener("click", function () {
+      var turningOn = video.muted;
+      video.muted = !turningOn;
+      toggle.setAttribute("aria-pressed", String(turningOn));
+      toggle.querySelector(".hero__sound-label").textContent =
+        turningOn ? "Sound off" : "Sound on";
+
+      // Unmuting can require a fresh play() on some browsers.
+      if (turningOn) {
+        var p = video.play();
+        if (p && typeof p.catch === "function") p.catch(function () {});
+      }
+    });
+  }
+
   function initYear() {
     var el = document.querySelector("[data-year]");
     if (el) el.textContent = new Date().getFullYear();
@@ -356,6 +417,7 @@
     initReveal();
     initCounters();
     initForm();
+    initHeroVideo();
     initYear();
   }
 
