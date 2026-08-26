@@ -125,12 +125,17 @@ before launch:
 - **"A track record of supporting major projects"** on the manpower page — carried over
   from the previous site.
 
-### 3. Registrations not claimed anywhere
+### 3. Registrations
 
-The site deliberately does **not** claim any IEC (Import Export Code), FSSAI licence,
-APEDA registration, GST number or certification, because those were not supplied.
-Buyers of food products will ask for them. Once you have the real numbers, the natural
-places to add them are the footer and the `sourcing.html` documentation section.
+**Published:** GSTIN `33AAKCC8884D1ZF` — shown in the footer on every page, in the
+contact details card, and as `taxID` in the Organization structured data. The number
+was checksum-validated before publishing (state code 33 = Tamil Nadu, PAN AAKCC8884D,
+entity type Company, check digit F correct).
+
+**Still not claimed anywhere:** IEC (Import Export Code), FSSAI licence, APEDA
+registration and any product certifications, because those have not been supplied.
+Buyers of food products will ask for them. Add them alongside the GSTIN in
+`src/partials/footer.html` and the contact card in `src/pages/contact.html`.
 
 Export documentation is described as *what a shipment typically requires* rather than
 as credentials Crudo holds — that phrasing is deliberate; keep it that way unless the
