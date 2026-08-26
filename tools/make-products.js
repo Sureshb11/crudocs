@@ -43,8 +43,8 @@ const CATEGORIES = [
     nav: "spices",
     name: "Spices &amp; Seasonings",
     plain: "Spices & Seasonings",
-    art: "food.svg",
-    alt: "Assorted food products in bowls — turmeric, chilli, eggs, pulses, lentils and peppercorns",
+    art: "spices.svg",
+    alt: "Bowls of turmeric, red chilli flakes, black peppercorns and whole spices",
     title: "Indian Spices Exporter — Turmeric, Chilli, Pepper, Cumin | Crudo",
     desc:
       "Crudo sources and exports Indian spices — turmeric, red chilli, black pepper, cumin, coriander, cardamom, clove, cinnamon and blended masalas — graded to buyer specification and shipped from Chennai.",
@@ -92,8 +92,8 @@ const CATEGORIES = [
     nav: "grains",
     name: "Rice &amp; Food Grains",
     plain: "Rice & Food Grains",
-    art: "food.svg",
-    alt: "Assorted food products in bowls including grains and pulses",
+    art: "grains.svg",
+    alt: "Bowls of rice, sorghum and millet grains",
     title: "Rice & Food Grain Exporter — Sona Masoori, Ponni, Millets | Crudo",
     desc:
       "Crudo exports rice and food grains from India — Sona Masoori, Ponni and other non-basmati rice, raw and parboiled, broken grades, maize, sorghum and millets — graded, packed and documented to buyer specification.",
@@ -146,8 +146,8 @@ const CATEGORIES = [
     nav: "pulses",
     name: "Pulses &amp; Lentils",
     plain: "Pulses & Lentils",
-    art: "food.svg",
-    alt: "Assorted food products in bowls including lentils and pulses",
+    art: "pulses.svg",
+    alt: "Bowls of chana, chickpeas, kidney beans and split pulses",
     title: "Pulses Exporter from India — Chana, Chickpeas, Kidney Beans | Crudo",
     desc:
       "Crudo sources and exports Indian pulses — chana and chana dal, kabuli chickpeas, kidney beans, cowpea and horse gram — whole and split, machine cleaned and graded to specification.",
@@ -189,8 +189,8 @@ const CATEGORIES = [
     nav: "produce",
     name: "Fresh Fruits &amp; Vegetables",
     plain: "Fresh Fruits & Vegetables",
-    art: "food.svg",
-    alt: "Assorted fresh food products",
+    art: "produce.svg",
+    alt: "Bowls of fresh vegetables, green chillies and fruit",
     title: "Fresh Fruit & Vegetable Exporter — Bananas, Drumstick, Coconut | Crudo",
     desc:
       "Crudo exports fresh fruits and vegetables from India — potatoes, green chilli, drumstick, ginger, garlic, bananas and coconut — graded, packed and moved by reefer or air.",
