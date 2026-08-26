@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" role="img" aria-labelledby="globe-title globe-desc" fill="none">
+  <title id="globe-title">Export routes from India</title>
+  <desc id="globe-desc">A stylised globe with trade routes radiating from India towards the Gulf, Africa, Europe and South East Asia.</desc>
+
+  <defs>
+    <radialGradient id="gSphere" cx="36%" cy="30%" r="78%">
+      <stop offset="0%"   stop-color="#2b2b63"/>
+      <stop offset="52%"  stop-color="#1a1a3c"/>
+      <stop offset="100%" stop-color="#0b0b1a"/>
+    </radialGradient>
+    <linearGradient id="gRim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#e3bd68" stop-opacity=".95"/>
+      <stop offset="45%"  stop-color="#c0922b" stop-opacity=".35"/>
+      <stop offset="100%" stop-color="#e3bd68" stop-opacity=".75"/>
+    </linearGradient>
+    <linearGradient id="gArc" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#d4a53c" stop-opacity="0"/>
+      <stop offset="28%"  stop-color="#e3bd68" stop-opacity=".95"/>
+      <stop offset="100%" stop-color="#f2e2b8" stop-opacity=".25"/>
+    </linearGradient>
+    <radialGradient id="gGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#e3bd68" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#e3bd68" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="clipSphere"><circle cx="320" cy="320" r="232"/></clipPath>
+  </defs>
+
+  <!-- Outer aura -->
+  <circle cx="320" cy="320" r="300" fill="url(#gGlow)" opacity=".30"/>
+
+  <!-- Orbit rings -->
+  <ellipse cx="320" cy="320" rx="292" ry="292" stroke="#e3bd68" stroke-opacity=".14" stroke-width="1"/>
+  <ellipse cx="320" cy="320" rx="292" ry="112" stroke="#e3bd68" stroke-opacity=".18" stroke-width="1" transform="rotate(-22 320 320)"/>
+  <ellipse cx="320" cy="320" rx="268" ry="268" stroke="#e3bd68" stroke-opacity=".10" stroke-width="1" stroke-dasharray="2 9"/>
+
+  <!-- Sphere -->
+  <circle cx="320" cy="320" r="232" fill="url(#gSphere)"/>
+
+  <g clip-path="url(#clipSphere)">
+    <!-- Latitude lines -->
+    <g stroke="#8f8fc4" stroke-opacity=".20" stroke-width="1">
+      <ellipse cx="320" cy="320" rx="232" ry="34"/>
+      <ellipse cx="320" cy="320" rx="226" ry="94"/>
+      <ellipse cx="320" cy="320" rx="212" ry="150"/>
+      <ellipse cx="320" cy="320" rx="188" ry="200"/>
+      <path d="M88 320h464M120 214h400M120 426h400"/>
+    </g>
+    <!-- Longitude lines -->
+    <g stroke="#8f8fc4" stroke-opacity=".16" stroke-width="1">
+      <ellipse cx="320" cy="320" rx="34"  ry="232"/>
+      <ellipse cx="320" cy="320" rx="98"  ry="232"/>
+      <ellipse cx="320" cy="320" rx="162" ry="232"/>
+    </g>
+
+    <!-- Abstract land masses: suggestive, not cartographic -->
+    <g fill="#e3bd68" fill-opacity=".13">
+      <path d="M150 214c26-16 58-12 84 2 20 11 44 6 62 18 14 9 8 28-6 34-24 10-52 4-76 12-20 7-42 2-56-14-12-14-20-42-8-52z"/>
+      <path d="M236 300c30-8 62 4 92 0 22-3 44 8 52 28 7 17-6 36-24 40-34 8-70-2-104 6-20 5-40-8-44-28-4-22 8-40 28-46z"/>
+      <path d="M334 400c30-10 64 2 90 20 18 12 20 40 4 54-18 15-44 10-66 4-24-7-50-14-62-36-9-17 6-36 34-42z"/>
+      <path d="M420 208c24-10 52-4 70 14 14 14 10 38-8 46-22 10-48 2-64-14-13-13-14-40 2-46z"/>
+    </g>
+
+    <!-- Trade routes leaving India -->
+    <g stroke="url(#gArc)" stroke-width="2" stroke-linecap="round" fill="none">
+      <path d="M352 342C300 300 244 268 172 262"/>
+      <path d="M352 342C318 264 292 194 300 128"/>
+      <path d="M352 342C412 300 470 276 528 282"/>
+      <path d="M352 342C400 396 442 442 456 500"/>
+      <path d="M352 342C286 372 226 406 196 460"/>
+    </g>
+
+    <!-- Destination nodes -->
+    <g fill="#e3bd68">
+      <circle cx="172" cy="262" r="4"/>
+      <circle cx="300" cy="128" r="4"/>
+      <circle cx="528" cy="282" r="4"/>
+      <circle cx="456" cy="500" r="4"/>
+      <circle cx="196" cy="460" r="4"/>
+    </g>
+    <g fill="#e3bd68" fill-opacity=".22">
+      <circle cx="172" cy="262" r="11"/>
+      <circle cx="300" cy="128" r="11"/>
+      <circle cx="528" cy="282" r="11"/>
+      <circle cx="456" cy="500" r="11"/>
+      <circle cx="196" cy="460" r="11"/>
+    </g>
+
+    <!-- Origin: Chennai -->
+    <circle cx="352" cy="342" r="26" fill="#d4a53c" fill-opacity=".14"/>
+    <circle cx="352" cy="342" r="14" fill="#d4a53c" fill-opacity=".28"/>
+    <circle cx="352" cy="342" r="6.5" fill="#f2e2b8"/>
+  </g>
+
+  <!-- Rim light -->
+  <circle cx="320" cy="320" r="232" stroke="url(#gRim)" stroke-width="1.5"/>
+  <circle cx="320" cy="320" r="240" stroke="#e3bd68" stroke-opacity=".12" stroke-width="1"/>
+</svg>

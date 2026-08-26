@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" role="img" aria-labelledby="mp-t" preserveAspectRatio="xMidYMid slice">
+  <title id="mp-t">Technical manpower supply</title>
+  <defs>
+    <linearGradient id="mpBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0e0e24"/><stop offset="50%" stop-color="#1e1e52"/><stop offset="100%" stop-color="#2d2d72"/>
+    </linearGradient>
+    <radialGradient id="mpGlow" cx="22%" cy="20%" r="66%">
+      <stop offset="0%" stop-color="#e3bd68" stop-opacity=".34"/><stop offset="100%" stop-color="#e3bd68" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="mpN"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3"/><feColorMatrix values="0 0 0 0 0.14 0 0 0 0 0.12 0 0 0 0 0.28 0 0 0 .22 0"/></filter>
+  </defs>
+  <rect width="900" height="560" fill="url(#mpBg)"/>
+  <rect width="900" height="560" fill="url(#mpGlow)"/>
+  <g stroke="#e3bd68" stroke-opacity=".3" stroke-width="1.5" fill="none">
+    <path d="M180 300 330 200 480 300 630 200 750 300M180 300 330 400 480 300 630 400 750 300M330 200v200M630 200v200M480 300h270"/>
+  </g>
+  <g>
+    <g transform="translate(180 300)"><circle cy="-26" r="15" fill="#e3bd68"/><path d="M-24 24a24 24 0 0 1 48 0z" fill="#e3bd68"/></g>
+    <g transform="translate(330 200)"><circle cy="-24" r="14" fill="#f2e2b8"/><path d="M-22 22a22 22 0 0 1 44 0z" fill="#f2e2b8"/></g>
+    <g transform="translate(480 300)"><circle cy="-30" r="18" fill="#fff"/><path d="M-28 28a28 28 0 0 1 56 0z" fill="#fff"/></g>
+    <g transform="translate(630 200)"><circle cy="-24" r="14" fill="#f2e2b8"/><path d="M-22 22a22 22 0 0 1 44 0z" fill="#f2e2b8"/></g>
+    <g transform="translate(750 300)"><circle cy="-26" r="15" fill="#e3bd68"/><path d="M-24 24a24 24 0 0 1 48 0z" fill="#e3bd68"/></g>
+    <g transform="translate(330 400)" opacity=".72"><circle cy="-22" r="13" fill="#9d9dd6"/><path d="M-20 20a20 20 0 0 1 40 0z" fill="#9d9dd6"/></g>
+    <g transform="translate(630 400)" opacity=".72"><circle cy="-22" r="13" fill="#9d9dd6"/><path d="M-20 20a20 20 0 0 1 40 0z" fill="#9d9dd6"/></g>
+  </g>
+  <g fill="#e3bd68" fill-opacity=".16"><circle cx="480" cy="300" r="66"/></g>
+  <rect width="900" height="560" filter="url(#mpN)" opacity=".45"/>
+</svg>

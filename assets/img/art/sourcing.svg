@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" role="img" aria-labelledby="so-t" preserveAspectRatio="xMidYMid slice">
+  <title id="so-t">Contract sourcing and export</title>
+  <defs>
+    <linearGradient id="soBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#14142b"/><stop offset="55%" stop-color="#233054"/><stop offset="100%" stop-color="#3c4a2a"/>
+    </linearGradient>
+    <radialGradient id="soGlow" cx="80%" cy="80%" r="66%">
+      <stop offset="0%" stop-color="#d4a53c" stop-opacity=".42"/><stop offset="100%" stop-color="#d4a53c" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soN"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3"/><feColorMatrix values="0 0 0 0 0.16 0 0 0 0 0.16 0 0 0 0 0.2 0 0 0 .22 0"/></filter>
+  </defs>
+  <rect width="900" height="560" fill="url(#soBg)"/>
+  <rect width="900" height="560" fill="url(#soGlow)"/>
+  <g stroke="#e3bd68" stroke-opacity=".2" stroke-width="1" stroke-dasharray="5 8" fill="none">
+    <path d="M-20 430c150-90 300-90 460 0s310 90 480 10"/>
+    <path d="M-20 380c150-90 300-90 460 0s310 90 480 10"/>
+  </g>
+  <g>
+    <g transform="translate(250 300)">
+      <rect x="-110" y="-70" width="220" height="140" rx="8" fill="#d4a53c" fill-opacity=".9"/>
+      <g stroke="#8a6414" stroke-opacity=".55" stroke-width="3">
+        <path d="M-80-70v140M-40-70v140M0-70v140M40-70v140M80-70v140"/>
+      </g>
+      <rect x="-110" y="-70" width="220" height="140" rx="8" fill="none" stroke="#fff2cf" stroke-opacity=".4" stroke-width="2"/>
+    </g>
+    <g transform="translate(560 330)">
+      <rect x="-90" y="-58" width="180" height="116" rx="7" fill="#7fa8e8" fill-opacity=".78"/>
+      <g stroke="#1d2c5e" stroke-opacity=".45" stroke-width="3">
+        <path d="M-60-58v116M-30-58v116M0-58v116M30-58v116M60-58v116"/>
+      </g>
+      <rect x="-90" y="-58" width="180" height="116" rx="7" fill="none" stroke="#dbe9ff" stroke-opacity=".4" stroke-width="2"/>
+    </g>
+    <g transform="translate(720 232)" opacity=".8">
+      <rect x="-70" y="-45" width="140" height="90" rx="6" fill="#8fbf5a" fill-opacity=".7"/>
+      <g stroke="#2f4a18" stroke-opacity=".4" stroke-width="2.5"><path d="M-42-45v90M-14-45v90M14-45v90M42-45v90"/></g>
+    </g>
+  </g>
+  <g stroke="#f2e2b8" stroke-opacity=".65" stroke-width="2.5" fill="none" stroke-linecap="round">
+    <path d="M120 150h180"/><path d="M270 128l32 22-32 22"/>
+  </g>
+  <g fill="#f2e2b8" fill-opacity=".55">
+    <circle cx="120" cy="150" r="6"/><circle cx="400" cy="120" r="4"/><circle cx="470" cy="160" r="3"/><circle cx="350" cy="170" r="3"/>
+  </g>
+  <rect width="900" height="560" filter="url(#soN)" opacity=".45"/>
+</svg>

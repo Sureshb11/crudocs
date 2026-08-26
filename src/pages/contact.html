@@ -1,32 +1,36 @@
 <!--meta
 {
-  "title": "Contact Crudo — Request a Quote | Chennai, India",
+  "title": "Contact Crudo — Send a Sourcing Requirement | Chennai, India",
   "ogTitle": "Contact Crudo",
-  "description": "Contact Crudo for oil field services, tubular inspection, chemical supply or technical manpower. Call +91 70003 19611, email info@crudocs.com, or send an enquiry from our Chennai office.",
+  "description": "Contact Crudo to source and export from India. Call +91 70003 19611, email info@crudocs.com, or send your product, grade, quantity and destination port for a quotation.",
   "path": "contact.html",
   "nav": "contact",
   "priority": 0.9,
   "crumbs": [{ "name": "Contact Us", "url": "contact.html" }],
   "faq": [
     {
-      "q": "Which standards does Crudo inspect to?",
-      "a": "All tubular inspection work is carried out in strict compliance with the latest API specifications and DS-1 Category 1 to 4 requirements, with client-specific acceptance criteria applied alongside the published standard."
-    },
-    {
-      "q": "Does Crudo work offshore as well as onshore?",
-      "a": "Yes. Our technical manpower and field services divisions support both onshore facilities and offshore installations."
-    },
-    {
-      "q": "Can services be combined into a single scope?",
-      "a": "Yes. Oil field services, tubular inspection, chemical supply and technical manpower are frequently packaged into one scope with a single point of responsibility and one schedule."
+      "q": "Do you only supply the products listed on the website?",
+      "a": "No. The lists are what buyers ask us for most often, not a catalogue. If a food or industrial product can be bought in India and legally exported, send us the specification and quantity and we will find a vendor and quote it."
     },
     {
       "q": "What information should I include in an enquiry?",
-      "a": "For inspection, the string details, size range and applicable standard. For field services, the programme and window. For chemicals, the product, grade, quantity and delivery point. For manpower, the roles, certifications, headcount and mobilisation date."
+      "a": "The product, the grade or specification, the quantity, your preferred packing, the destination port and the Incoterm you want quoted. If you are unsure of the grade, describe the end use and we will advise."
     },
     {
-      "q": "Which industries does Crudo serve?",
-      "a": "Primarily oil and gas across upstream, midstream and downstream operations. The chemical supply division also serves petrochemical and construction customers."
+      "q": "Which Incoterms do you quote on?",
+      "a": "EXW, FOB, CFR and CIF. Shipments are arranged as full container load, less than container load, reefer or air freight depending on the goods and the urgency."
+    },
+    {
+      "q": "Can you send a sample before a bulk order?",
+      "a": "Yes. For food and agricultural goods where grade matters, a sample is normally sent for approval before the bulk order is committed."
+    },
+    {
+      "q": "Can one shipment contain products from several vendors?",
+      "a": "Yes. Mixed loads are consolidated from multiple suppliers into a single shipment with one invoice and one point of contact."
+    },
+    {
+      "q": "What are your payment terms?",
+      "a": "Terms are agreed per order and per buyer relationship, typically an advance against proforma invoice or a letter of credit for larger shipments. Terms are set out in writing with the quotation."
     }
   ]
 }
@@ -38,10 +42,10 @@ meta-->
       <li><a href="index.html">Home</a></li>
       <li><span aria-current="page">Contact Us</span></li>
     </ol>
-    <h1>Get in touch</h1>
+    <h1>Send us a requirement</h1>
     <p>
-      Send us the scope and we will respond with something considered. For anything
-      urgent, the phone is faster than the form.
+      Product, grade, quantity and destination port is enough to start. For anything
+      urgent, WhatsApp or the phone is faster than the form.
     </p>
   </div>
 </section>
@@ -51,11 +55,11 @@ meta-->
 
     <!-- ============================ Form ============================ -->
     <div class="reveal">
-      <p class="eyebrow">Send an enquiry</p>
-      <h2>Tell us about the requirement</h2>
+      <p class="eyebrow">Enquiry</p>
+      <h2>Tell us what you need sourced</h2>
       <p style="color:var(--muted);margin-bottom:1.75rem;">
         The more detail you include, the more useful our reply will be. Fields marked
-        <span style="color:#c0392b;">*</span> are required.
+        <span style="color:#b3372e;">*</span> are required.
       </p>
 
       <!--
@@ -87,27 +91,32 @@ meta-->
             <input type="email" id="email" name="email" autocomplete="email" required>
           </div>
           <div class="field">
-            <label for="phone">Phone</label>
+            <label for="phone">Phone / WhatsApp</label>
             <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel">
           </div>
         </div>
 
-        <div class="field">
-          <label for="service">Service of interest</label>
-          <select id="service" name="service">
-            <option value="">Select a service…</option>
-            <option>Oil Field Services</option>
-            <option>Tubular Inspection Services</option>
-            <option>Chemical Supply</option>
-            <option>Technical Manpower Supply</option>
-            <option>Combined scope</option>
-            <option>Other / general enquiry</option>
-          </select>
+        <div class="field--row">
+          <div class="field">
+            <label for="service">What do you need?</label>
+            <select id="service" name="service">
+              <option value="">Select…</option>
+              <option>Food &amp; Agri Products</option>
+              <option>Industrial Chemicals</option>
+              <option>Technical Manpower Supply</option>
+              <option>Sourcing &amp; Export</option>
+              <option>Something not listed</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="destination">Destination port / country</label>
+            <input type="text" id="destination" name="destination" placeholder="e.g. Jebel Ali, UAE">
+          </div>
         </div>
 
         <div class="field">
           <label for="message">Your requirement <span class="req">*</span></label>
-          <textarea id="message" name="message" required placeholder="Scope, standard, quantities, location and timing — whatever is relevant."></textarea>
+          <textarea id="message" name="message" required placeholder="Product, grade or specification, quantity, packing preference, Incoterm and any timing constraints."></textarea>
           <span class="field__hint">Please do not include confidential commercial terms in a first message.</span>
         </div>
 
@@ -121,9 +130,7 @@ meta-->
           <a class="btn btn--ghost" href="https://wa.me/917000319611" target="_blank" rel="noopener">Message on WhatsApp</a>
         </div>
 
-        <p class="form__note">
-          Your details are used only to respond to this enquiry.
-        </p>
+        <p class="form__note">Your details are used only to respond to this enquiry.</p>
       </form>
     </div>
 
@@ -146,7 +153,7 @@ meta-->
           <li>
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg>
             <div>
-              <strong>Phone</strong>
+              <strong>Phone &amp; WhatsApp</strong>
               <a href="tel:+917000319611">+91 70003 19611</a>
             </div>
           </li>
@@ -188,47 +195,53 @@ meta-->
 
     <div class="faq reveal">
       <details>
-        <summary>Which standards does Crudo inspect to?</summary>
+        <summary>Do you only supply the products listed on the website?</summary>
         <div class="faq__body">
-          All tubular inspection work is carried out in strict compliance with the latest
-          API specifications and DS-1 Category 1 to 4 requirements. Client-specific
-          acceptance criteria are applied alongside the published standard — where your
-          criteria are tighter, the tighter figure governs.
-        </div>
-      </details>
-
-      <details>
-        <summary>Does Crudo work offshore as well as onshore?</summary>
-        <div class="faq__body">
-          Yes. Our technical manpower and field services divisions support both onshore
-          facilities and offshore installations.
-        </div>
-      </details>
-
-      <details>
-        <summary>Can services be combined into a single scope?</summary>
-        <div class="faq__body">
-          Yes, and most of our work is structured that way. Oil field services, tubular
-          inspection, chemical supply and technical manpower can be packaged into one
-          scope with a single point of responsibility and one schedule.
+          No. The lists are what buyers ask us for most often, not a catalogue. If a food
+          or industrial product can be bought in India and legally exported, send us the
+          specification and quantity and we will find a vendor and quote it.
         </div>
       </details>
 
       <details>
         <summary>What information should I include in an enquiry?</summary>
         <div class="faq__body">
-          For inspection: the string details, size range and applicable standard. For
-          field services: the programme and the window. For chemicals: product, grade,
-          quantity and delivery point. For manpower: roles, certifications, headcount and
-          mobilisation date.
+          The product, the grade or specification, the quantity, your preferred packing,
+          the destination port and the Incoterm you want quoted. If you are unsure of the
+          grade, describe the end use and we will advise.
         </div>
       </details>
 
       <details>
-        <summary>Which industries does Crudo serve?</summary>
+        <summary>Which Incoterms do you quote on?</summary>
         <div class="faq__body">
-          Primarily oil and gas, across upstream, midstream and downstream operations. The
-          chemical supply division also serves petrochemical and construction customers.
+          EXW, FOB, CFR and CIF. Shipments are arranged as full container load, less than
+          container load, reefer or air freight depending on the goods and the urgency.
+        </div>
+      </details>
+
+      <details>
+        <summary>Can you send a sample before a bulk order?</summary>
+        <div class="faq__body">
+          Yes. For food and agricultural goods where grade matters, a sample is normally
+          sent for approval before the bulk order is committed.
+        </div>
+      </details>
+
+      <details>
+        <summary>Can one shipment contain products from several vendors?</summary>
+        <div class="faq__body">
+          Yes. Mixed loads are consolidated from multiple suppliers into a single shipment
+          with one invoice and one point of contact.
+        </div>
+      </details>
+
+      <details>
+        <summary>What are your payment terms?</summary>
+        <div class="faq__body">
+          Terms are agreed per order and per buyer relationship — typically an advance
+          against proforma invoice, or a letter of credit for larger shipments. Terms are
+          set out in writing with the quotation.
         </div>
       </details>
     </div>

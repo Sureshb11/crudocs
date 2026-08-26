@@ -44,7 +44,7 @@ const organisation = {
   logo: SITE + "/assets/img/logo.png",
   image: SITE + "/assets/img/og-image.jpg",
   description:
-    "Crudo provides oil field services, tubular inspection, chemical supply and technical manpower to the upstream, midstream and downstream oil and gas industry.",
+    "Crudo is a sourcing and export house in Chennai, India, supplying food and agricultural products, industrial chemicals and skilled technical manpower to buyers abroad.",
   email: "info@crudocs.com",
   telephone: "+91-70003-19611",
   address: {
@@ -55,6 +55,14 @@ const organisation = {
     postalCode: "600095",
     addressCountry: "IN"
   },
+  knowsAbout: [
+    "Food and agricultural product export",
+    "Spice export",
+    "Egg export",
+    "Industrial chemical supply",
+    "Technical manpower supply",
+    "Contract sourcing from India"
+  ],
   contactPoint: {
     "@type": "ContactPoint",
     telephone: "+91-70003-19611",
@@ -75,8 +83,8 @@ function parsePage(raw) {
   };
 }
 
-/* Service pages live under the "Services & Products" nav item. */
-const SERVICE_NAVS = ["oilfield", "tubular", "chemicals", "manpower"];
+/* Product and service pages live under the "Products & Services" nav item. */
+const SERVICE_NAVS = ["food", "chemicals", "manpower", "sourcing"];
 
 /**
  * Mark the active item in the primary nav.
@@ -91,8 +99,8 @@ function markActive(html, nav) {
 
   if (SERVICE_NAVS.indexOf(nav) !== -1) {
     out = out.replace(
-      /class="nav__link"( [^>]*?)?\sdata-nav="services"/,
-      'class="nav__link is-section"$1 data-nav="services"'
+      /class="nav__link"( [^>]*?)?\sdata-nav="products"/,
+      'class="nav__link is-section"$1 data-nav="products"'
     );
   }
 
