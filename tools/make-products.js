@@ -26,11 +26,11 @@ const INFO =
   '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>';
 
 const SIDENAV = [
+  ["eggs", "product-eggs.html", "Table Eggs"],
   ["spices", "product-spices.html", "Spices &amp; Seasonings"],
   ["grains", "product-grains.html", "Rice &amp; Food Grains"],
   ["pulses", "product-pulses.html", "Pulses &amp; Lentils"],
   ["produce", "product-produce.html", "Fresh Fruits &amp; Vegetables"],
-  ["eggs", "product-eggs.html", "Eggs &amp; Poultry"],
   ["naturals", "product-naturals.html", "Oilseeds, Nuts &amp; Naturals"],
   ["chemicals", "product-chemicals.html", "Industrial Chemicals"]
 ];
@@ -197,9 +197,9 @@ const CATEGORIES = [
     plain: "Fresh Fruits & Vegetables",
     art: "food.svg",
     alt: "Assorted fresh food products",
-    title: "Fresh Fruit & Vegetable Exporter — Onions, Bananas, Mangoes | Crudo",
+    title: "Fresh Fruit & Vegetable Exporter — Onions, Bananas, Coconut | Crudo",
     desc:
-      "Crudo exports fresh fruits and vegetables from India — onions, potatoes, green chilli, drumstick, bananas, mangoes, pomegranates and coconut — graded, packed and moved by reefer or air.",
+      "Crudo exports fresh fruits and vegetables from India — onions, potatoes, green chilli, drumstick, okra, bananas, pomegranates and coconut — graded, packed and moved by reefer or air.",
     lede:
       "Fresh cargo is unforgiving. Grade, cold chain and transit time have to be planned together, or the consignment arrives worth less than it cost.",
     intro: [
@@ -225,9 +225,7 @@ const CATEGORIES = [
         cols: ["Product", "Packing", "Notes"],
         rows: [
           ["Bananas", "Cartons, reefer", "Cavendish and regional varieties"],
-          ["Mangoes", "Cartons, reefer or air", "Variety and maturity confirmed per order"],
           ["Pomegranates", "Cartons, reefer", "Size count, colour"],
-          ["Grapes", "Punnets, cartons, reefer", "Seasonal; variety per order"],
           ["Coconut", "Bulk, mesh, cartons", "Fresh, semi-husked, husked"]
         ]
       }
@@ -243,52 +241,67 @@ const CATEGORIES = [
       }
     ],
     season:
-      "Fresh produce is entirely seasonal. Mango, pomegranate and grape windows are narrow, and onion availability and price swing hard through the year. We will give you the realistic window rather than promise year-round supply."
+      "Fresh produce is entirely seasonal. Pomegranate and banana windows shift through the year, and onion availability and price swing hard with the crop and with export policy. We will give you the realistic window rather than promise year-round supply."
   },
 
   {
     slug: "eggs",
     nav: "eggs",
-    name: "Eggs &amp; Poultry Products",
-    plain: "Eggs & Poultry Products",
-    art: "food.svg",
-    alt: "Assorted food products including a tray of eggs",
-    title: "Egg Exporter from India — Table Eggs, Hatching Eggs, Egg Powder | Crudo",
+    name: "Table Eggs",
+    plain: "Table Eggs",
+    art: "eggs.svg",
+    alt: "Trays of white and brown shell eggs nested in bowls",
+    title: "Table Egg Exporter from India — Namakkal Sourcing | Crudo",
     desc:
-      "Crudo exports eggs and poultry products from India — white and brown table eggs, hatching eggs and egg powder — with reefer capacity, careful handling and veterinary health certification arranged as part of the order.",
+      "Crudo exports white and brown shell table eggs from the Namakkal belt in Tamil Nadu, India's largest egg producing cluster. Weight graded, trayed and cartoned, moved under temperature control with veterinary health certification arranged as part of the order.",
     lede:
-      "Eggs are time-sensitive, fragile and heavily regulated at the border. All three have to be handled together or not at all.",
+      "Our closest-sourced line. Namakkal — India's largest egg producing cluster — sits about 250 km from our Chennai base, and shell eggs are the product we are best placed in the country to ship.",
     intro: [
-      "Egg export is a logistics problem as much as a sourcing one. Shell strength, age at loading, temperature through transit and the veterinary certificate all determine whether a consignment arrives saleable.",
-      "We arrange the reefer capacity, the handling and the health certification as part of the order rather than leaving the buyer to coordinate three parties across a time zone."
+      "Egg export is a logistics problem as much as a sourcing one. Shell strength, age at loading, the temperature held through transit and the veterinary certificate together decide whether a consignment arrives saleable or arrives as a claim.",
+      "Being close to the source is what makes that manageable. Short road transit to Chennai port means eggs load younger, spend less of their shelf life getting to the vessel, and are handled fewer times before they are stuffed.",
+      "We arrange the sourcing, the grading, the temperature-controlled capacity and the health certification as one order, rather than leaving a buyer to coordinate three parties across a time zone."
     ],
-    pills: ["Reefer capacity", "Veterinary certified", "Trays &amp; cartons", "Size graded"],
+    pills: ["Namakkal belt sourcing", "Weight graded", "Temperature controlled", "Veterinary certified"],
     tables: [
       {
-        head: "Egg products",
-        cols: ["Product", "Forms available", "Typical grading points"],
+        head: "Table eggs",
+        cols: ["Product", "Packing", "Typical grading points"],
         rows: [
-          ["Table eggs — white shell", "Trays, cartons, master boxes", "Weight grade (g), shell quality, age"],
-          ["Table eggs — brown shell", "Trays, cartons, master boxes", "Weight grade (g), shell quality, age"],
-          ["Hatching eggs", "Setter trays, specialist packing", "Breed, fertility, handling regime"],
-          ["Whole egg powder", "Sacks, drums", "Moisture, solubility, microbiology"],
-          ["Egg albumen powder", "Sacks, drums", "Protein %, moisture, foaming"],
-          ["Egg yolk powder", "Sacks, drums", "Fat %, moisture, colour"]
+          ["White shell table eggs", "Trays, cartons, master boxes", "Weight grade (g), shell quality, age at loading"],
+          ["Brown shell table eggs", "Trays, cartons, master boxes", "Weight grade (g), shell quality, age at loading"]
+        ]
+      },
+      {
+        head: "Indicative weight grades",
+        cols: ["Grade", "Approximate weight per egg", "Common use"],
+        rows: [
+          ["Small", "Under 45 g", "Processing and catering"],
+          ["Medium", "45–52 g", "General retail"],
+          ["Large", "53–62 g", "Retail; the most requested grade"],
+          ["Extra large", "Over 62 g", "Premium retail"]
         ]
       }
     ],
     notes: [
       {
+        h: "Why Namakkal matters to you",
+        p: "Namakkal in Tamil Nadu is India's largest egg producing cluster and the country's main hub for egg export. Sourcing from that belt and loading at Chennai keeps the road leg short, which is the single biggest lever on how much shelf life survives to your port. It is the clearest geographic advantage we have."
+      },
+      {
         h: "Handling &amp; transit",
-        p: "Shell eggs are loaded as fresh as the schedule allows, packed to limit movement in transit, and carried under a temperature regime agreed for the route. Transit time is planned against shelf life, not the other way round."
+        p: "Eggs are loaded as fresh as the schedule allows, packed to limit movement in transit, and carried under a temperature regime agreed for the route. Transit time is planned against remaining shelf life, not the other way round — if a routing does not leave enough life at your end, we will say so."
       },
       {
         h: "Health certification",
-        p: "Shell eggs and egg products require veterinary health certification, and many destinations impose additional conditions on poultry products. Confirm the destination at enquiry stage so the correct certification is arranged before loading."
+        p: "Shell eggs require veterinary health certification, and many destinations impose further conditions on poultry products. Confirm the destination at enquiry stage so the correct certification is arranged before loading rather than chased afterwards."
+      },
+      {
+        h: "Contracts &amp; continuity",
+        p: "Egg prices move with feed cost and with demand peaks through the year. Where you need continuity rather than spot purchases, a standing monthly volume can be agreed so you are not re-negotiating every shipment."
       }
     ],
     season:
-      "Egg supply and price move with feed cost and with demand peaks through the year. Long-term contracts can be arranged where you need continuity of supply rather than spot purchases."
+      "Egg supply and price move with feed cost and with seasonal demand rather than with a harvest. Availability is steadier than any crop on our list, which is part of what makes it a good line to contract on."
   },
 
   {
@@ -298,9 +311,9 @@ const CATEGORIES = [
     plain: "Oilseeds, Nuts & Naturals",
     art: "food.svg",
     alt: "Assorted natural food products in bowls",
-    title: "Oilseeds, Nuts & Natural Products Exporter — Sesame, Groundnut, Honey | Crudo",
+    title: "Oilseeds, Nuts & Natural Products Exporter — Sesame, Groundnut, Coconut | Crudo",
     desc:
-      "Crudo exports oilseeds, nuts and natural products from India — sesame seed, groundnut, coconut products, jaggery, natural honey, tea and coffee — graded and documented to buyer specification.",
+      "Crudo exports oilseeds, nuts and natural products from India — sesame seed, groundnut, cashew, coconut products, jaggery and natural honey — graded and documented to buyer specification.",
     lede:
       "The long tail of Indian food export: oilseeds, coconut, sweeteners and beverages, sourced against the same grade discipline as the headline commodities.",
     intro: [
@@ -321,16 +334,13 @@ const CATEGORIES = [
         ]
       },
       {
-        head: "Coconut, sweeteners &amp; beverages",
+        head: "Coconut &amp; sweeteners",
         cols: ["Product", "Forms available", "Notes"],
         rows: [
           ["Desiccated coconut", "Fine, medium, coarse", "Fat %, moisture"],
           ["Coconut oil", "Crude, refined", "Food and cosmetic grades"],
-          ["Coir &amp; coconut shell products", "Various", "Non-food; sourced on request"],
           ["Jaggery", "Blocks, cubes, powder", "Colour, moisture, purity"],
-          ["Natural honey", "Drums, retail jars", "Moisture, HMF, source"],
-          ["Tea", "CTC, orthodox, dust grades", "Grade, garden, liquor"],
-          ["Coffee", "Green beans, arabica &amp; robusta", "Screen size, defects, region"]
+          ["Natural honey", "Drums, retail jars", "Moisture, HMF, source"]
         ]
       }
     ],
@@ -345,7 +355,7 @@ const CATEGORIES = [
       }
     ],
     season:
-      "Sesame and groundnut follow their harvest cycles; coconut products and honey are available more evenly through the year. Tea and coffee vary by garden and estate season."
+      "Sesame and groundnut follow their harvest cycles, while coconut products, jaggery and honey are available more evenly through the year."
   }
 ];
 

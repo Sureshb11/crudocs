@@ -167,10 +167,16 @@ before launch:
 - **"We aim to reply to written enquiries within one business day"** on the contact page.
 - **"A track record of supporting major projects"** on the manpower page — carried over
   from the previous site.
-- **Product tables** across the six category pages list commodities, forms and grading
-  points that are standard for Indian agri-export. Confirm you can actually source each
-  one before launch, and delete any you would not take an order for — the pages are
-  written so removing a row costs nothing.
+- **Product tables** now carry 49 lines, down from 58. Nine were cut after audit:
+  mangoes and grapes (approved-facility treatment and registered orchards), hatching
+  eggs and the three egg powders (specialist trade / EIA-approved plant), coir
+  (not food), tea and coffee (separate boards and trades). The remaining 14 flagged
+  "confirm" in the audit still need a supplier you would call tomorrow — see the
+  audit document.
+- **Table eggs are promoted as the flagship line**, on the strength of Namakkal
+  proximity. The page states we source from the Namakkal belt — confirm that supplier
+  relationship actually exists before leaving it published, because it is now the most
+  prominent claim on the site.
 - **Grading parameters** (ASTA colour, curcumin %, bulk density, screen size and so on)
   are the industry-normal ones for each commodity. They describe what a specification
   should cover, not a guarantee of any particular figure.

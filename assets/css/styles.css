@@ -416,6 +416,16 @@ strong { color: var(--ink-800); font-weight: 600; }
   color: var(--gold-700);
 }
 
+/* Lead tile — the closest-sourced line carries visible weight. */
+.tile--lead { border-color: var(--gold-500); box-shadow: var(--shadow-md); }
+.tile--lead:hover { border-color: var(--gold-600); }
+.tile__count--lead {
+  padding: .22rem .6rem;
+  border-radius: 3px;
+  background: var(--gold-500);
+  color: var(--ink-900);
+}
+
 /* Spec pill row used on product pages */
 .pills { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 0 1.5rem; padding: 0; list-style: none; }
 .pills li {
