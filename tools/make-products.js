@@ -94,9 +94,9 @@ const CATEGORIES = [
     plain: "Rice & Food Grains",
     art: "food.svg",
     alt: "Assorted food products in bowls including grains and pulses",
-    title: "Rice & Food Grain Exporter — Basmati, Non-Basmati, Millets | Crudo",
+    title: "Rice & Food Grain Exporter — Sona Masoori, Ponni, Millets | Crudo",
     desc:
-      "Crudo exports rice and food grains from India — basmati and non-basmati rice, parboiled and raw, broken grades, wheat, maize and millets — graded, packed and documented to buyer specification.",
+      "Crudo exports rice and food grains from India — Sona Masoori, Ponni and other non-basmati rice, raw and parboiled, broken grades, maize, sorghum and millets — graded, packed and documented to buyer specification.",
     lede:
       "Rice is sold on a specification, not a name. Length, broken percentage, moisture and polish decide the price, and we quote against the exact grade you need.",
     intro: [
@@ -109,7 +109,6 @@ const CATEGORIES = [
         head: "Rice",
         cols: ["Type", "Common grades", "Typical grading points"],
         rows: [
-          ["Basmati", "1121, 1509, Pusa, traditional", "Average grain length, elongation, aroma"],
           ["Non-basmati long grain", "Raw, parboiled, steam", "Length, broken %, moisture"],
           ["Sona Masoori", "Raw, steam", "Broken %, polish, moisture"],
           ["Ponni &amp; IR varieties", "Raw, parboiled", "Broken %, chalk, admixture"],
@@ -120,7 +119,6 @@ const CATEGORIES = [
         head: "Other grains",
         cols: ["Product", "Forms available", "Typical use"],
         rows: [
-          ["Wheat", "Whole grain, flour", "Milling and food grades"],
           ["Maize / corn", "Whole, broken", "Feed and food grades"],
           ["Sorghum (jowar)", "Whole, flour", "Food and feed"],
           ["Pearl millet (bajra)", "Whole, flour", "Food and feed"],
@@ -150,9 +148,9 @@ const CATEGORIES = [
     plain: "Pulses & Lentils",
     art: "food.svg",
     alt: "Assorted food products in bowls including lentils and pulses",
-    title: "Pulses & Lentils Exporter — Toor, Urad, Moong, Chana | Crudo",
+    title: "Pulses Exporter from India — Chana, Chickpeas, Kidney Beans | Crudo",
     desc:
-      "Crudo sources and exports Indian pulses and lentils — toor, urad, moong, masoor and chana dal, chickpeas and kidney beans — whole and split, machine cleaned and graded to specification.",
+      "Crudo sources and exports Indian pulses — chana and chana dal, kabuli chickpeas, kidney beans, cowpea and horse gram — whole and split, machine cleaned and graded to specification.",
     lede:
       "Pulses trade on purity, size and colour. We buy to the grade you specify and show you the goods before they ship.",
     intro: [
@@ -165,10 +163,6 @@ const CATEGORIES = [
         head: "Pulses and lentils",
         cols: ["Product", "Forms available", "Typical grading points"],
         rows: [
-          ["Toor / pigeon pea", "Whole, split (dal)", "Purity %, size, colour"],
-          ["Urad / black gram", "Whole, split, husked", "Purity %, moisture"],
-          ["Moong / green gram", "Whole, split, husked", "Size (count), colour, purity"],
-          ["Masoor / red lentil", "Whole, split", "Size, colour, broken %"],
           ["Chana / bengal gram", "Whole, split (dal)", "Size (count/oz), purity"],
           ["Chickpeas (kabuli)", "Whole", "Size (mm), colour, defects"],
           ["Kidney beans (rajma)", "Whole", "Size, colour, defects"],
@@ -197,9 +191,9 @@ const CATEGORIES = [
     plain: "Fresh Fruits & Vegetables",
     art: "food.svg",
     alt: "Assorted fresh food products",
-    title: "Fresh Fruit & Vegetable Exporter — Onions, Bananas, Coconut | Crudo",
+    title: "Fresh Fruit & Vegetable Exporter — Bananas, Drumstick, Coconut | Crudo",
     desc:
-      "Crudo exports fresh fruits and vegetables from India — onions, potatoes, green chilli, drumstick, okra, bananas, pomegranates and coconut — graded, packed and moved by reefer or air.",
+      "Crudo exports fresh fruits and vegetables from India — potatoes, green chilli, drumstick, ginger, garlic, bananas and coconut — graded, packed and moved by reefer or air.",
     lede:
       "Fresh cargo is unforgiving. Grade, cold chain and transit time have to be planned together, or the consignment arrives worth less than it cost.",
     intro: [
@@ -212,11 +206,9 @@ const CATEGORIES = [
         head: "Vegetables",
         cols: ["Product", "Packing", "Typical grading points"],
         rows: [
-          ["Onions (red, pink)", "Mesh bags, cartons", "Diameter (mm), skin, dryness"],
           ["Potatoes", "Mesh bags, cartons", "Size, defects, variety"],
           ["Green chilli", "Ventilated cartons", "Length, colour, firmness"],
           ["Drumstick (moringa pods)", "Cartons", "Length, straightness, freshness"],
-          ["Okra &amp; gourds", "Ventilated cartons", "Size, tenderness"],
           ["Ginger &amp; garlic", "Mesh bags, cartons", "Size, dryness, defects"]
         ]
       },
@@ -225,7 +217,6 @@ const CATEGORIES = [
         cols: ["Product", "Packing", "Notes"],
         rows: [
           ["Bananas", "Cartons, reefer", "Cavendish and regional varieties"],
-          ["Pomegranates", "Cartons, reefer", "Size count, colour"],
           ["Coconut", "Bulk, mesh, cartons", "Fresh, semi-husked, husked"]
         ]
       }
@@ -241,7 +232,7 @@ const CATEGORIES = [
       }
     ],
     season:
-      "Fresh produce is entirely seasonal. Pomegranate and banana windows shift through the year, and onion availability and price swing hard with the crop and with export policy. We will give you the realistic window rather than promise year-round supply."
+      "Fresh produce is entirely seasonal. Banana and drumstick supply shifts through the year, and green chilli is a short-window crop. We will give you the realistic window rather than promise year-round supply."
   },
 
   {
@@ -307,47 +298,36 @@ const CATEGORIES = [
   {
     slug: "naturals",
     nav: "naturals",
-    name: "Oilseeds, Nuts &amp; Naturals",
-    plain: "Oilseeds, Nuts & Naturals",
-    art: "food.svg",
-    alt: "Assorted natural food products in bowls",
-    title: "Oilseeds, Nuts & Natural Products Exporter — Sesame, Groundnut, Coconut | Crudo",
+    name: "Oilseeds &amp; Naturals",
+    plain: "Oilseeds & Naturals",
+    art: "naturals.svg",
+    alt: "Bowls of sesame, groundnut, desiccated coconut and jaggery",
+    title: "Oilseed & Natural Products Exporter — Sesame, Groundnut, Jaggery | Crudo",
     desc:
-      "Crudo exports oilseeds, nuts and natural products from India — sesame seed, groundnut, cashew, coconut products, jaggery and natural honey — graded and documented to buyer specification.",
+      "Crudo exports oilseeds and natural food products from India — sesame seed, groundnut, desiccated coconut and jaggery — graded, tested and documented to buyer specification.",
     lede:
-      "The long tail of Indian food export: oilseeds, coconut, sweeteners and beverages, sourced against the same grade discipline as the headline commodities.",
+      "A short, deliberate list. These are the oilseed and natural lines we are genuinely well placed to source out of Tamil Nadu and the south.",
     intro: [
-      "These are the products buyers most often ask for after the main order is settled — a container of sesame alongside the rice, or honey and jaggery to round out a retail range.",
-      "The category is broad and the list below is not exhaustive. If you need something in this space that is not shown, ask."
+      "This category used to be longer. We trimmed it to the products we can actually stand behind, because a catalogue that promises everything tells a buyer nothing.",
+      "If you need something in this space that is not listed — another oilseed, a nut, a sweetener — ask anyway. Sourcing to order is the business; the list is only what comes up most often."
     ],
-    pills: ["Bulk &amp; retail", "Food grade", "Private label", "Sourced to order"],
+    pills: ["Bulk &amp; retail", "Food grade", "Private label", "Aflatoxin tested"],
     tables: [
       {
-        head: "Oilseeds &amp; nuts",
+        head: "Oilseeds, coconut &amp; sweeteners",
         cols: ["Product", "Forms available", "Typical grading points"],
         rows: [
           ["Sesame seed", "Natural, hulled, black", "Purity %, oil content, moisture"],
           ["Groundnut / peanut", "Bold, java, blanched, split", "Count per oz, moisture, aflatoxin"],
-          ["Cashew kernels", "Grades W180 to W450, pieces", "Grade, colour, defects"],
-          ["Niger &amp; mustard seed", "Whole", "Purity %, oil content"],
-          ["Castor seed", "Whole", "Oil content, moisture"]
-        ]
-      },
-      {
-        head: "Coconut &amp; sweeteners",
-        cols: ["Product", "Forms available", "Notes"],
-        rows: [
           ["Desiccated coconut", "Fine, medium, coarse", "Fat %, moisture"],
-          ["Coconut oil", "Crude, refined", "Food and cosmetic grades"],
-          ["Jaggery", "Blocks, cubes, powder", "Colour, moisture, purity"],
-          ["Natural honey", "Drums, retail jars", "Moisture, HMF, source"]
+          ["Jaggery", "Blocks, cubes, powder", "Colour, moisture, purity"]
         ]
       }
     ],
     notes: [
       {
         h: "Testing",
-        p: "Aflatoxin, pesticide residue and heavy metal testing can be arranged where the destination market requires it. Groundnut in particular is routinely tested for aflatoxin — confirm the limit your market applies."
+        p: "Aflatoxin, pesticide residue and heavy metal testing can be arranged where the destination market requires it. Groundnut in particular is routinely tested for aflatoxin — confirm the limit your market applies and it is priced into the quotation."
       },
       {
         h: "Packing",
@@ -355,8 +335,8 @@ const CATEGORIES = [
       }
     ],
     season:
-      "Sesame and groundnut follow their harvest cycles, while coconut products, jaggery and honey are available more evenly through the year."
-  }
+      "Sesame and groundnut follow their harvest cycles, while desiccated coconut and jaggery are available more evenly through the year."
+    }
 ];
 
 /* Rendering --------------------------------------------------------------- */
