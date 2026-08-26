@@ -63,12 +63,21 @@ meta-->
       </p>
 
       <!--
-        The form posts to the endpoint named in data-endpoint. Leave it empty and the
-        form falls back to opening the visitor's mail client, so it is never a dead end.
-        To enable direct submission, create a free form endpoint (for example at
-        formspree.io) and paste the URL into data-endpoint below.
+        Delivery routes, in priority order:
+          1. data-endpoint — set this to a form backend URL (Formspree, Web3Forms,
+             Basin) and every submission posts there instead, with an inline
+             success message. Nothing else needs changing.
+          2. WhatsApp — the default. Composes the enquiry and opens WhatsApp to
+             the number in data-whatsapp. No account or API key needed.
+          3. Email — the second button, opens the visitor's mail client.
+        Whichever route runs, the enquiry text is also shown for copying, so a
+        blocked popup or missing mail client cannot swallow a buyer's message.
       -->
-      <form class="form" id="enquiry-form" data-endpoint="" method="post" action="mailto:info@crudocs.com" novalidate>
+      <form class="form" id="enquiry-form"
+            data-endpoint=""
+            data-whatsapp="917000319611"
+            data-email="info@crudocs.com"
+            method="post" action="mailto:info@crudocs.com" novalidate>
         <div class="hp" aria-hidden="true">
           <label for="_hp">Leave this field empty</label>
           <input type="text" id="_hp" name="_hp" tabindex="-1" autocomplete="off">
@@ -123,14 +132,20 @@ meta-->
         <div class="form__status" aria-live="polite"></div>
 
         <div class="btn-row">
-          <button class="btn btn--primary" type="submit">
-            Send enquiry
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          <button class="btn btn--primary" type="submit" data-channel="whatsapp">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.43 12.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.86 1.21 3.06c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
+            Send on WhatsApp
           </button>
-          <a class="btn btn--ghost" href="https://wa.me/917000319611" target="_blank" rel="noopener">Message on WhatsApp</a>
+          <button class="btn btn--ghost" type="submit" data-channel="email">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+            Send by email
+          </button>
         </div>
 
-        <p class="form__note">Your details are used only to respond to this enquiry.</p>
+        <p class="form__note">
+          Both routes send the same enquiry — pick whichever suits you. WhatsApp usually
+          reaches us fastest. Your details are used only to respond to this enquiry.
+        </p>
       </form>
     </div>
 

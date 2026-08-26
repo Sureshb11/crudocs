@@ -121,19 +121,38 @@ your change back into it.
 
 ## Before this goes live — please check these
 
-### 1. Contact form endpoint (required)
+### 1. Contact form — working, but worth upgrading
 
-The form in `src/pages/contact.html` has an empty `data-endpoint`, so submitting opens
-the visitor's own mail client with the enquiry pre-filled. That works everywhere but is
-not ideal. To receive submissions directly, create a form endpoint (Formspree,
-Web3Forms, Basin — all have free tiers) and paste the URL in:
+The form **does deliver** with no setup. It has three routes, in priority order:
+
+| Route | When it runs | Needs |
+| --- | --- | --- |
+| Form backend | `data-endpoint` is set | An account (Formspree, Web3Forms, Basin) |
+| **WhatsApp** | default | Nothing — deep link to `data-whatsapp` |
+| Email | the "Send by email" button | Nothing — `mailto:` |
+
+Whichever route runs, the composed enquiry is **also shown as copyable text** with a
+copy button, so a blocked popup or an unconfigured mail client cannot swallow a
+buyer's message.
+
+The WhatsApp route is the default because it needs no infrastructure and reaches a
+phone instantly. Its one weakness is that it hands off to another app — you only get
+the enquiry once the visitor presses send in WhatsApp.
+
+**To capture enquiries server-side instead**, create a form endpoint and set it in
+`src/pages/contact.html`:
 
 ```html
 <form class="form" id="enquiry-form" data-endpoint="https://formspree.io/f/xxxxxxx" ...>
 ```
 
-Then run `node build.js`. `assets/js/main.js` already handles the POST, the success and
-error states, and a spam honeypot.
+Then `node build.js`. The endpoint takes priority automatically — WhatsApp and email
+become unused, submissions POST in the background, and the visitor sees an inline
+thank-you without leaving the page. If the POST fails, the copy-out fallback appears
+so the enquiry is still recoverable.
+
+All four paths were tested: valid submit, empty submit (blocked), honeypot (silently
+dropped), endpoint success, and endpoint failure.
 
 ### 2. Claims to verify
 

@@ -154,47 +154,167 @@
 
   /* ---------------------------------------------------------
      Contact form
-     Posts to the endpoint in [data-endpoint] when one is set;
-     otherwise falls back to the visitor's own mail client so the
-     form is never a dead end.
+
+     Three delivery routes, in priority order:
+       1. data-endpoint  — a real form backend, if one is configured
+       2. WhatsApp       — deep link to the business number
+       3. Email          — mailto with the enquiry pre-composed
+
+     Whichever route is used, the composed enquiry is also offered as
+     copyable text, so a blocked popup or an unconfigured mail client
+     can never swallow a buyer's message.
      --------------------------------------------------------- */
   function initForm() {
     var form = document.getElementById("enquiry-form");
     if (!form) return;
 
     var status = form.querySelector(".form__status");
-    var submit = form.querySelector("[type=submit]");
     var endpoint = form.dataset.endpoint || "";
+    var WHATSAPP = form.dataset.whatsapp || "917000319611";
+    var EMAIL = form.dataset.email || "info@crudocs.com";
 
-    function say(msg, kind) {
+    function say(html, kind) {
       if (!status) return;
-      status.textContent = msg;
+      status.innerHTML = html;
       status.className = "form__status is-visible form__status--" + kind;
       status.setAttribute("role", kind === "err" ? "alert" : "status");
+      status.scrollIntoView({ block: "nearest", behavior: reduceMotion ? "auto" : "smooth" });
     }
 
-    function mailtoFallback(data) {
-      var lines = [
-        "Name: " + (data.get("name") || ""),
-        "Company: " + (data.get("company") || "—"),
-        "Email: " + (data.get("email") || ""),
-        "Phone: " + (data.get("phone") || "—"),
-        "Service: " + (data.get("service") || "—"),
+    function field(data, name) {
+      var v = (data.get(name) || "").toString().trim();
+      return v || "—";
+    }
+
+    /** The enquiry as plain text, used by every route. */
+    function compose(data) {
+      return [
+        "ENQUIRY FROM CRUDOCS.COM",
         "",
-        data.get("message") || ""
-      ];
-      var href = "mailto:info@crudocs.com" +
-        "?subject=" + encodeURIComponent("Enquiry from crudocs.com — " + (data.get("service") || "General")) +
-        "&body=" + encodeURIComponent(lines.join("\n"));
-      window.location.href = href;
-      say("Opening your email app with the enquiry ready to send. If nothing happens, write to info@crudocs.com directly.", "ok");
+        "Name: " + field(data, "name"),
+        "Company: " + field(data, "company"),
+        "Email: " + field(data, "email"),
+        "Phone: " + field(data, "phone"),
+        "Interest: " + field(data, "service"),
+        "Destination: " + field(data, "destination"),
+        "",
+        "Requirement:",
+        field(data, "message")
+      ].join("\n");
+    }
+
+    function subjectFor(data) {
+      var svc = (data.get("service") || "").toString().trim();
+      return "Enquiry from crudocs.com" + (svc ? " — " + svc : "");
+    }
+
+    /** Offer the text for copying, so a failed hand-off is recoverable. */
+    function offerCopy(text, lead, kind) {
+      var id = "enq-copy";
+      say(
+        lead +
+        '<div class="form__copy">' +
+        '<button type="button" class="btn btn--ghost form__copybtn" data-copy>Copy enquiry text</button>' +
+        '<a class="btn btn--ghost" href="mailto:' + EMAIL + '">' + EMAIL + "</a>" +
+        "</div>" +
+        '<pre class="form__pre" id="' + id + '"></pre>',
+        kind
+      );
+      var pre = status.querySelector("#" + id);
+      if (pre) pre.textContent = text;
+
+      var btn = status.querySelector("[data-copy]");
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        var done = function () {
+          btn.textContent = "Copied";
+          window.setTimeout(function () { btn.textContent = "Copy enquiry text"; }, 2000);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, function () { selectPre(pre); });
+        } else {
+          selectPre(pre);
+        }
+      });
+    }
+
+    function selectPre(pre) {
+      if (!pre) return;
+      var range = document.createRange();
+      range.selectNodeContents(pre);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }
+
+    /** Open a URL in a new tab, falling back to same-tab navigation. */
+    function openUrl(url) {
+      var w = window.open(url, "_blank", "noopener");
+      if (!w) window.location.href = url;
+      return !!w;
+    }
+
+    function sendWhatsApp(data) {
+      var text = compose(data);
+      openUrl("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(text));
+      offerCopy(
+        text,
+        "<strong>WhatsApp is opening with your enquiry ready to send.</strong> " +
+          "Press send there to reach us. If WhatsApp did not open, copy the text below " +
+          "and message or email it to us.",
+        "ok"
+      );
+    }
+
+    function sendEmail(data) {
+      var text = compose(data);
+      window.location.href =
+        "mailto:" + EMAIL +
+        "?subject=" + encodeURIComponent(subjectFor(data)) +
+        "&body=" + encodeURIComponent(text);
+      offerCopy(
+        text,
+        "<strong>Your email app is opening with the enquiry ready to send.</strong> " +
+          "If nothing happened, copy the text below and send it to " + EMAIL + ".",
+        "ok"
+      );
+    }
+
+    function postToEndpoint(data, button) {
+      var original = button ? button.textContent : "";
+      if (button) { button.disabled = true; button.textContent = "Sending…"; }
+      say("Sending your enquiry…", "ok");
+
+      fetch(endpoint, { method: "POST", body: data, headers: { Accept: "application/json" } })
+        .then(function (res) {
+          if (!res.ok) throw new Error("Request failed");
+          form.reset();
+          say(
+            "<strong>Thank you — your enquiry has reached us.</strong> " +
+              "Our team will respond within one business day.",
+            "ok"
+          );
+        })
+        .catch(function () {
+          offerCopy(
+            compose(data),
+            "<strong>We could not submit the form just now.</strong> " +
+              "Copy the text below and send it to us on WhatsApp or by email — " +
+              "it will not be lost.",
+            "err"
+          );
+        })
+        .finally(function () {
+          if (button) { button.disabled = false; button.textContent = original; }
+        });
     }
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
-      // Honeypot: silently accept and drop obvious bot submissions.
-      if (form.querySelector("[name=_hp]") && form.querySelector("[name=_hp]").value) return;
+      // Honeypot: silently drop obvious bot submissions.
+      var hp = form.querySelector("[name=_hp]");
+      if (hp && hp.value) return;
 
       if (!form.checkValidity()) {
         form.reportValidity();
@@ -202,31 +322,15 @@
       }
 
       var data = new FormData(form);
+      var button = e.submitter || form.querySelector("[type=submit]");
+      var channel = button && button.dataset ? button.dataset.channel : "";
 
-      if (!endpoint) {
-        mailtoFallback(data);
-        return;
-      }
-
-      var original = submit ? submit.textContent : "";
-      if (submit) { submit.disabled = true; submit.textContent = "Sending…"; }
-      say("Sending your enquiry…", "ok");
-
-      fetch(endpoint, { method: "POST", body: data, headers: { Accept: "application/json" } })
-        .then(function (res) {
-          if (!res.ok) throw new Error("Request failed");
-          form.reset();
-          say("Thank you — your enquiry has reached us. Our team will respond within one business day.", "ok");
-        })
-        .catch(function () {
-          say("We could not submit the form just now. Please email info@crudocs.com or call +91 70003 19611.", "err");
-        })
-        .finally(function () {
-          if (submit) { submit.disabled = false; submit.textContent = original; }
-        });
+      if (endpoint) { postToEndpoint(data, button); return; }
+      if (channel === "email") { sendEmail(data); return; }
+      sendWhatsApp(data);
     });
 
-    // Preselect the service when arriving from a service page (?service=…).
+    // Preselect the interest when arriving from a product page (?service=…).
     var preset = new URLSearchParams(window.location.search).get("service");
     if (preset) {
       var select = form.querySelector("[name=service]");

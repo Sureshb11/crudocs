@@ -920,6 +920,26 @@ tbody td:first-child { font-weight: 600; color: var(--ink-800); }
 .form__status--err { background: #fdecea; color: #a8302a; border: 1px solid #f5c6c2; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
+/* Copy-out fallback: the composed enquiry, always recoverable by hand. */
+.form__status strong { color: inherit; }
+.form__copy { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .9rem; }
+.form__copy .btn { padding: .55rem 1rem; font-size: var(--fs-xs); }
+.form__pre {
+  margin: .9rem 0 0;
+  padding: .9rem 1rem;
+  max-height: 15rem;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--ink-800);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
 .info-list { display: grid; gap: 1.1rem; margin: 0; padding: 0; list-style: none; }
 .info-list li { display: flex; gap: 1rem; margin: 0; }
 .info-list svg { flex: none; color: var(--gold-700); margin-top: .25rem; }
