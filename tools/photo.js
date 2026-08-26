@@ -45,7 +45,7 @@ const SLOTS = {
   food:      { w: 1400, h: 875, art: "art/food.svg" },
   manpower:  { w: 1400, h: 875, art: "art/manpower.svg" },
   sourcing:  { w: 1400, h: 875, art: "art/sourcing.svg" },
-  globe:     { w: 1200, h: 1200, art: "art/globe.svg" },
+  globe:     { w: 1600, h: 1000, art: "art/globe.svg" },
   about:     { w: 1200, h: 815, art: "about.jpg" }
 };
 
@@ -180,6 +180,29 @@ function revert(slot, spec) {
   return touched;
 }
 
+/** How many pages already point at this slot's photograph. */
+function countPhotoRefs(slot) {
+  const needle = 'assets/img/photo-' + slot + '.';
+  let n = 0;
+  for (const file of fs.readdirSync(PAGES).filter((f) => f.endsWith(".html"))) {
+    if (fs.readFileSync(path.join(PAGES, file), "utf8").includes(needle)) n++;
+  }
+  return n;
+}
+
+/** Replace the alt text on an already-deployed photo slot. */
+function updateAlt(slot, alt) {
+  const re = new RegExp('(<img\\b[^>]*src="assets/img/photo-' + slot + '\\.jpg"[^>]*?alt=")[^"]*(")', "g");
+  for (const file of fs.readdirSync(PAGES).filter((f) => f.endsWith(".html"))) {
+    const p = path.join(PAGES, file);
+    const s = fs.readFileSync(p, "utf8");
+    if (!re.test(s)) continue;
+    re.lastIndex = 0;
+    fs.writeFileSync(p, s.replace(re, "$1" + alt + "$2"));
+    console.log("  alt updated in src/pages/" + file);
+  }
+}
+
 function main() {
   const [slot, src, altText] = process.argv.slice(2);
 
@@ -200,7 +223,20 @@ function main() {
     console.log("Encoding " + slot + " from " + src);
     const out = encode(src, slot, spec);
     const n = rewriteToPhoto(slot, spec, out, altText);
-    if (!n) die("no references to assets/img/" + spec.art + " found in src/pages/");
+
+    if (!n) {
+      // A slot already carrying a photo has no illustration left to swap, so
+      // there is nothing to rewrite — the re-encode above already replaced the
+      // files in place. Only refresh the alt text if a new one was given.
+      const already = countPhotoRefs(slot);
+      if (!already) {
+        die("no references to assets/img/" + spec.art + " or to photo-" + slot +
+            " found in src/pages/");
+      }
+      console.log("  slot already carries a photograph — " + already +
+                  " reference(s) refreshed in place");
+      if (altText) updateAlt(slot, altText);
+    }
   }
 
   execFileSync("node", [path.join(ROOT, "build.js")], { stdio: "inherit", cwd: ROOT });

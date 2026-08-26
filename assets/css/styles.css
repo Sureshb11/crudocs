@@ -539,6 +539,11 @@ strong { color: var(--ink-800); font-weight: 600; }
 }
 .hero__art { position: relative; }
 .hero__art svg { width: 100%; height: auto; filter: drop-shadow(0 24px 60px rgba(0, 0, 0, .45)); }
+.hero__art picture, .hero__art img { width: 100%; height: auto; display: block; }
+.hero__art img {
+  border-radius: var(--radius-xl);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .45);
+}
 
 /* Ticker of traded goods — a live-trade cue under the hero */
 .ticker {
