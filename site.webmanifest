@@ -1,0 +1,12 @@
+{
+  "name": "Crudo — Technical and Consulting Services",
+  "short_name": "Crudo",
+  "description": "Oil field services, tubular inspection, chemical supply and technical manpower for the oil and gas industry.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2d2d72",
+  "icons": [
+    { "src": "/assets/img/favicon.png", "sizes": "192x192", "type": "image/png", "purpose": "any" }
+  ]
+}
