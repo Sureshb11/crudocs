@@ -238,18 +238,37 @@ and is a good first candidate for replacement.
 
 ## Deploying
 
-Plain static files, no build step at deploy time. For **GitHub Pages**:
+The site is live at **https://www.crudocs.com**, hosted on **Vercel** and deployed
+automatically from the `main` branch of this repository. Push to `main` and the change
+goes live — there is no separate publish step, and no build command is needed because
+the generated HTML is committed.
 
-1. Repository → **Settings** → **Pages**
-2. Source: **Deploy from a branch**, branch `main`, folder `/ (root)`
-3. Custom domain: `crudocs.com` (the `CNAME` file already declares it)
-4. Point DNS at GitHub Pages:
-   - `A` records for the apex domain → `185.199.108.153`, `185.199.109.153`,
-     `185.199.110.153`, `185.199.111.153`
-   - or a `CNAME` for `www` → `sureshb11.github.io`
-5. Tick **Enforce HTTPS** once the certificate is issued
+Verify a deploy landed:
 
-`.nojekyll` is present so the files are served as-is.
+```bash
+curl -sI https://www.crudocs.com/ | grep -i last-modified
+```
+
+### URLs
+
+Pages are served at their `.html` paths (`/products.html`, `/contact.html`), which is
+what every link on the site uses. Extensionless URLs such as `/products` currently
+return 404. Nothing on the site links to them, so navigation is unaffected, but if you
+want both forms to work add a `vercel.json`:
+
+```json
+{ "cleanUrls": true, "trailingSlash": false }
+```
+
+Note that `cleanUrls` makes `/products.html` redirect to `/products`, so every internal
+link would take an extra redirect hop unless the links are switched to extensionless
+at the same time.
+
+### CNAME
+
+The `CNAME` file in the repository root is a GitHub Pages artifact. Vercel ignores it,
+and the custom domain is configured in the Vercel dashboard instead. It is harmless to
+leave in place, and useful if you ever move hosting.
 
 ---
 
