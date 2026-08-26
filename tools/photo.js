@@ -5,7 +5,7 @@
  *   node tools/photo.js <slot> <path-to-image> ["alt text"]
  *
  * Slots: spices · grains · pulses · produce · eggs · naturals · chemicals
- *        food · manpower · sourcing · globe · about
+ *        food · manpower · sourcing · globe · shipband · about
  *
  * What it does:
  *   1. Resizes and crops the photo to the slot's aspect ratio
@@ -45,7 +45,8 @@ const SLOTS = {
   food:      { w: 1400, h: 875, art: "art/food.svg" },
   manpower:  { w: 1400, h: 875, art: "art/manpower.svg" },
   sourcing:  { w: 1400, h: 875, art: "art/sourcing.svg" },
-  globe:     { w: 1600, h: 1000, art: "art/globe.svg" },
+  globe:     { w: 1440, h: 1080, art: "art/globe.svg" },
+  shipband:  { w: 1600, h: 1000, art: "art/sourcing.svg" },
   about:     { w: 1200, h: 815, art: "about.jpg" }
 };
 

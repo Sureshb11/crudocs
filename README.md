@@ -205,58 +205,83 @@ profiles to the `.social` block if they exist.
 
 ## Imagery
 
-There is no product photography on the site. Rather than use generic stock, every
-visual is **original SVG artwork** in `assets/img/art/`:
+Every visual position on the site is a real photograph in `assets/img/`, encoded as a
+WebP with a JPEG fallback (`photo-<slot>.webp` / `.jpg`):
 
-| File | Used for |
+| Slot | Used for |
 | --- | --- |
-| `globe.svg` | Homepage hero — trade routes radiating from India |
-| `food.svg` | Homepage food card — the combined range |
-| `spices.svg` | Spices & seasonings |
-| `grains.svg` | Rice & food grains |
-| `pulses.svg` | Pulses & lentils |
-| `produce.svg` | Fresh fruits & vegetables |
-| `eggs.svg` | Eggs & poultry products |
-| `naturals.svg` | Oilseeds, nuts & naturals |
-| `chemicals.svg` | Industrial chemicals — molecular lattice |
-| `manpower.svg` | Technical manpower — workforce network |
-| `sourcing.svg` | Sourcing & export — freight containers |
-| `og-card.svg` | Source art for the social share card |
+| `globe` | Homepage hero — Earth at night, city lights across India and South East Asia |
+| `shipband` | Homepage "where we ship" band, end of page — container ship at a port terminal |
+| `food` | Homepage "three divisions" card — the combined range |
+| `spices` | Spices & seasonings |
+| `grains` | Rice & food grains |
+| `pulses` | Pulses & lentils |
+| `produce` | Fresh fruits & vegetables |
+| `eggs` | Table eggs — also the homepage flagship band |
+| `naturals` | Oilseeds & naturals |
+| `chemicals` | Industrial chemicals |
+| `manpower` | Technical manpower |
+| `sourcing` | Sourcing & export page |
+| `about` | About page — the team in the warehouse |
 
-The six category panels share one composition but each has its own palette and
-contents, so the catalogue does not look like the same picture repeated. Regenerate
-them with `node tools/make-art.js`.
+The original SVG artwork this replaced is kept in `assets/img/art/` and regenerated
+with `node tools/make-art.js`, in case a slot ever needs to fall back to illustration —
+see "Reverting to illustration" below.
 
-### Swapping in real photographs
+### Swapping in a photograph
 
-There is a tool for this. Give it a slot and any photo — any size, any aspect ratio —
-and it resizes, crops, encodes a WebP plus a JPEG fallback, rewrites every reference in
-`src/pages/` to a `<picture>` element, and rebuilds:
+Give the tool a slot and any photo — any size, any aspect ratio — and it resizes,
+centre-crops to the slot's box, encodes a WebP plus a JPEG fallback, rewrites every
+reference in `src/pages/`, and rebuilds:
 
 ```bash
 node tools/photo.js food ~/Desktop/spices.jpg "Sacks of turmeric and chilli at a Chennai warehouse"
 ```
 
 Slots: `spices` · `grains` · `pulses` · `produce` · `eggs` · `naturals` ·
-`chemicals` · `food` · `manpower` · `sourcing` · `globe` · `about`.
+`chemicals` · `food` · `manpower` · `sourcing` · `globe` · `shipband` · `about`.
 The third argument is the alt text; omit it and the existing alt is kept.
 
-To go back to the illustration for a slot:
+**Never upscales.** A source smaller than the slot is encoded at the largest size it
+can fill honestly, and the `<img>` still declares the slot's full box so layout stays
+stable — upscaling would only produce a soft image in a bigger file.
+
+**Re-running a slot that already has a photograph** refreshes the files and alt text
+in place — it does not require an illustration reference to rewrite.
+
+The tool needs `cwebp` (`brew install webp`); `sips` is already on macOS.
+
+### Reverting to illustration
 
 ```bash
 node tools/photo.js food --revert
 ```
 
-The tool needs `cwebp` (`brew install webp`); `sips` is already on macOS.
+Only works while the slot's markup still points at the original `art/<slot>.svg`
+filename recorded in `tools/photo.js`'s `SLOTS` table — if the slot has since been
+reassigned (as `globe` was, see below), revert the markup by hand instead.
 
-Photographs of your actual goods, warehouse and shipments will convert better than the
-artwork — particularly on the food pages. Use real photos of real consignments; avoid
+### Adding a new slot, or splitting one in two
+
+Occasionally one image position needs to become two — that happened when the
+homepage's "where we ship" band was split off from the hero so each could carry a
+different photograph (`globe` for the hero, `shipband` for the band). The steps:
+
+1. Add the new slot to `SLOTS` in `tools/photo.js` with its target box.
+2. Duplicate the current `photo-<oldslot>.{jpg,webp}` files under the new slot's name.
+3. In `src/pages/`, repoint the `<picture>` block that should move onto the new slot's
+   filenames.
+4. Run `node tools/photo.js <oldslot> <new-photo>` to refresh the slot left behind.
+
+### Sourcing photographs
+
+Photographs of your actual goods, warehouse and shipments will convert better than
+stock — particularly on the food pages. Use real photos of real consignments; avoid
 AI-generated food imagery, which tends to carry visible artifacts (garbled label text,
 impossible packaging) that trade buyers notice, and never show a crate or sack branded
-with a company name that isn't Crudo's.
-
-`assets/img/about.jpg` is a stock handshake photo carried over from the previous site
-and is a good first candidate for replacement.
+with a company name that isn't Crudo's. Also avoid a cutout saved as JPEG — JPEG has no
+alpha channel, so the transparency checkerboard bakes into the pixels and renders as a
+grey grid on the page.
 
 ---
 
