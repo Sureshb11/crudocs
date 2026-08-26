@@ -1021,7 +1021,7 @@ strong { color: var(--ink); font-weight: 600; }
 /* --------------------------------------------------------------------------
    16. Motion
    -------------------------------------------------------------------------- */
-.reveal { opacity: 0; transform: translateY(22px); }
+.js .reveal { opacity: 0; transform: translateY(22px); }
 .reveal.is-in {
   opacity: 1;
   transform: none;
